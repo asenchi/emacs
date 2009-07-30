@@ -4,7 +4,6 @@
     (add-to-list 'auto-mode-alist (cons pattern mode))))
 
 ;; modes
-(add-auto-mode 'python-mode "\\.py$")
 (add-auto-mode 'python-mode "Fabfile\\.py$")
 (add-auto-mode 'yaml-mode "\\.yml$")
 (add-auto-mode 'crontab-mode "\\.?cron\\(tab\\)?\\'")
@@ -13,7 +12,5 @@
 (add-auto-mode 'lisp-mode "\\.emacs$")
 (add-auto-mode 'ruby-mode "\\.rake$")
 (add-auto-mode 'ruby-mode "Rakefile$")
-
-(add-to-list 'interpreter-mode-alist '("python" . python-mode))
 
 (provide 'modes)

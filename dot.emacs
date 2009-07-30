@@ -4,9 +4,6 @@
 ;; --------------------
 ;; set variables
 ;; --------------------
-(if (eq system-type 'darwin)
-    (setq *systemtype* (eq system-type 'darwin))
-  (setq *systemtype* (eq system-type 'berkeley-unix)))
 
 ;; --------------------
 ;; load-path
@@ -26,12 +23,12 @@
 (require 'gist)
 (require 'git)
 (require 'git-blame)
-(require 'doctest-mode)
 
 ;; asenchi
 (require 'functions)
 (require 'keys)
 (require 'modes)
+;(require 'python)
 
 ;; --------------------
 ;; color-theme
