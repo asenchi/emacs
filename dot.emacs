@@ -28,7 +28,9 @@
 (require 'functions)
 (require 'keys)
 (require 'modes)
-;(require 'python)
+
+(if (eq system-type 'darwin)
+    (require 'python))
 
 ;; --------------------
 ;; color-theme
