@@ -1,26 +1,32 @@
-;; FUNCTIONS
+;; --------------------
+;; functions
+;; --------------------
+;; handle dates
 (defun insert-date-long ()
-  "Insert long date at point."
+  "Insert date at cursor."
   (interactive)
   (insert (format-time-string "%a %b %e, %Y %l:%M %p")))
 
 (defun insert-date-short ()
-  "Insert concise date at point."
+  "Insert date at cursor."
   (interactive)
-  (insert (format-time-string "%Y-%m-%d:%H%M")))
+  (insert (format-time-string "%Y-%m-%d:%H:%M")))
 
-(defun dos-unix ()                                       
+
+;; handle file formats
+(defun dos-unix ()
   "Convert dos to unix endline characters."
   (interactive)
     (goto-char (point-min))
       (while (search-forward "\r" nil t) (replace-match "")))
-
 (defun unix-dos ()
   "Convert unix to dos endline characters."
   (interactive)
     (goto-char (point-min))
       (while (search-forward "\n" nil t) (replace-match "\r\n")))
 
+
+;; fullscreen
 (defun toggle-fullscreen ()
   "Toggle full screen."
   (interactive)
@@ -29,6 +35,8 @@
 			   nil
 			 'fullboth)))
 
+
+;; handle window splits
 (defun split-window-horizontally-other ()
   "Split windows horizontally and move to the new one."
   (interactive)
@@ -41,6 +49,8 @@
   (split-window-vertically)
   (other-window 1))
 
+
+;; auto compile our .emacs file
 (defun autocompile-init nil
   "compile itself if ~/.emacs"
   (interactive)
@@ -49,31 +59,23 @@
 	       (expand-file-name (concat default-directory "~/emacs")))
       (byte-compile-file (buffer-file-name))))
 
-(defun scroll-lines-up ()
-  (interactive)
-  (scroll-up 5))
 
-(defun scroll-lines-down ()
-  (interactive)
-  (scroll-down 5))
+;; emacs-lisp cleaner
+(defun elisp-indent-or-complete (&optional arg)
+  (interactive "p")
+  (call-interactively 'lisp-indent-line)
+  (unless (or (looking-back "^\\s-*")
+	      (bolp)
+	      (not (looking-back "[-A-Za-z0-9_*+/=<>!?]+")))
+    (call-interactively 'lisp-complete-symbol)))
 
-;; (defun cbm-lisp-environment ()
-;;   (interactive)
-;;   (split-window-horizontally)
-;;   (other-window 1)
-;;   (split-window-vertically)
-;;   (other-window 1)
-;;  (slime))
+(eval-after-load "lisp-mode"
+  '(progn
+     (define-key emacs-lisp-mode-map [tab] 'elisp-indent-or-complete)))
 
-(defun toggle-current-window-dedication ()
-  (interactive)
-  (let* ((window (selected-window))
-         (dedicated (window-dedicated-p window)))
-    (set-window-dedicated-p window (not dedicated))
-    (message "Window %sdedicated to %s"
-             (if dedicated "no longer " "")
-             (buffer-name))))
 
-(defun other-window-backward ()
-  (interactive)
-  (other-window -1))
+;; highlight line
+(defun turn-on-hl-line-mode ()
+  (if window-system (hl-line-mode t)))
+
+(provide 'functions)

@@ -1,66 +1,111 @@
-; -*- mode: Emacs-Lisp -*-
+;; -*- mode: Emacs-Lisp -*-
+;; -*- coding: utf-8 -*-
 
-;; User's $HOME
-(setq *user-prefix* (getenv "HOME"))
+;; --------------------
+;; set variables
+;; --------------------
+(if (eq system-type 'darwin)
+    (setq *systemtype* (eq system-type 'darwin))
+  (setq *systemtype* (eq system-type 'berkeley-unix)))
 
+;; --------------------
 ;; load-path
+;; --------------------
 (add-to-list 'load-path "~/.emacs.d/site-packages")
 (add-to-list 'load-path "~/.emacs.d/color-themes")
-(setq asenchi "~/.emacs.d/asenchi.el")
-(load-file asenchi)
+(add-to-list 'load-path "~/.emacs.d/asenchi")
 
+;; --------------------
+;; requires
+;; --------------------
+(require 'cl)
+(require 'yaml-mode)
+(require 'paredit)
+(require 'arduino-mode)
+;(require 'crontab-mode)
+(require 'gist)
+(require 'git)
+(require 'git-blame)
+(require 'doctest-mode)
+
+;; asenchi
+(require 'functions)
+(require 'keys)
+(require 'modes)
+
+;; --------------------
 ;; color-theme
+;; --------------------
+; dark
 (load "color-theme-almost-monokai")
 (color-theme-almost-monokai)
+; light
+;(load "color-theme-github")
+;(color-theme-github)
 
-;; fonts
-(if (string-equal *user-prefix* "/Users/cbm")
-  (set-face-font
-   'default "-apple-inconsolata-medium-r-normal--14-0-72-72-m-0-iso10646-1")
-  (set-face-font
-   'default "-*-terminus-*-r-*-*-14-*-*-*-*-*-*-*"))
+;; default-font
+(if (eq system-type 'darwin)
+    (set-default-font
+     "-apple-inconsolata-medium-r-normal--14-0-72-72-m-0-iso10646-1"))
 
-;; startup
-(defun emacs-reloaded ()
-  (animate-string (concat ";; Initialiazation complete. Welcome to "
-			  (substring (emacs-version) 0 16)
-                          ". ")
-		  0 1)
-  (newline-and-indent)(newline-and-indent))
+(if (eq window-system 'x)
+  (set-default-font "Inconsolata-12"))
 
-(display-time)
-(setq inhibit-splash-screen t)
-(setq indent-tabs-mode nil)
-(setq window-min-height 5)
-(setq debug-on-error t)
+;; --------------------
+;; setup
+;; --------------------
 (fset 'yes-or-no-p 'y-or-n-p)
-;(setq initial-frame-alist '(user-position t))
+(display-time)
+(setq window-min-height 5
+      debug-on-error t)
 
-(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
-(add-hook 'text-mode-hook 'turn-on-auto-fill)
-(add-hook 'after-save-hook 'autocompile-init)
-
-
-
-;;; Font lock various modes
-(setq 
+;; --------------------
+;; font-lock-modes
+;; --------------------
+(setq
  html-mode-hook '(lambda () (font-lock-mode 1))
  makefile-mode-hook '(lambda () (font-lock-mode 1))
  shell-mode-hook '(lambda () (font-lock-mode 1))
  compilation-mode-hook '(lambda () (font-lock-mode 1)))
 
-;; Emacs-Lisp
-(defun elisp-indent-or-complete (&optional arg)
-  (interactive "p")
-  (call-interactively 'lisp-indent-line)
-  (unless (or (looking-back "^\\s-*")
-	      (bolp)
-	      (not (looking-back "[-A-Za-z0-9_*+/=<>!?]+")))
-    (call-interactively 'lisp-complete-symbol)))
+;; --------------------
+;; hooks
+;; --------------------
+(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+(add-hook 'text-mode-hook 'turn-on-auto-fill)
+(add-hook 'after-save-hook 'autocompile-init)
+(add-hook 'coding-hook 'turn-on-hl-line-mode)
+(add-hook 'python-mode-hook
+          (lambda ()
+            (define-key python-mode-map "\C-m" 'newline-and-indent)
+            (add-hook 'local-write-file-hooks
+                        '(lambda()
+                           (save-excursion
+                             (untabify (point-min) (point-max))
+                             (delete-trailing-whitespace))))
+             (set (make-local-variable 'tab-width) 4)
+             (set (make-local-variable 'indent-tabs-mode) 'nil)))
 
-(eval-after-load "lisp-mode"
+;; --------------------
+;; diff colors
+;; --------------------
+(eval-after-load 'diff-mode
   '(progn
-     (define-key emacs-lisp-mode-map [tab] 'elisp-indent-or-complete)))
+     (set-face-foreground 'diff-added "green4")
+     (set-face-foreground 'diff-removed "red3")))
+ 
+(eval-after-load 'magit
+  '(progn
+     (set-face-foreground 'magit-diff-add "green3")
+     (set-face-foreground 'magit-diff-del "red3")))
 
+;; --------------------
+;; custom settings
+;; --------------------
+(setq custom-file "~/.emacs.d/custom.el")
+(load custom-file)
+
+;; --------------------
 ;; START EMACS
-(add-hook 'after-init-hook 'emacs-reloaded)
+;; --------------------
+;(start-server)

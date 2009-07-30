@@ -1,8 +1,19 @@
+;; pretty auto-mode adder
+(defun add-auto-mode (mode &rest patterns)
+  (dolist (pattern patterns)
+    (add-to-list 'auto-mode-alist (cons pattern mode))))
+
 ;; modes
-(autoload 'python-mode "python-mode" "Python Mode." t)
+(add-auto-mode 'python-mode "\\.py$")
+(add-auto-mode 'python-mode "Fabfile\\.py$")
+(add-auto-mode 'yaml-mode "\\.yml$")
+(add-auto-mode 'crontab-mode "\\.?cron\\(tab\\)?\\'")
+(add-auto-mode 'text-mode "\\.te?xt$")
+(add-auto-mode 'perl-mode "\\.pl$")
+(add-auto-mode 'lisp-mode "\\.emacs$")
+(add-auto-mode 'ruby-mode "\\.rake$")
+(add-auto-mode 'ruby-mode "Rakefile$")
+
 (add-to-list 'interpreter-mode-alist '("python" . python-mode))
-(add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
-(add-to-list 'auto-mode-alist '("\\.text$" . text-mode))
-(add-to-list 'auto-mode-alist '("\\.txt$" . text-mode))
-(add-to-list 'auto-mode-alist '("\\.pl$" . perl-mode))
-(add-to-list 'auto-mode-alist '("\.emacs" . lisp-mode))
+
+(provide 'modes)
