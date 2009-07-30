@@ -1,0 +1,25 @@
+;; --------------------
+;; custom
+;; --------------------
+(custom-set-variables
+ '(auto-save-mode t)
+ '(column-number-mode t)
+ '(default-major-mode 'text-mode)
+ '(delete-auto-save-files t)
+ '(delete-old-versions t)
+ '(global-font-lock-mode t)
+ '(ibuffer-enable t)
+ '(ispell-program-name "aspell")
+ '(indent-tabs-mode nil)
+ '(inhibit-startup-screen t)
+ '(line-number-mode t)
+ '(make-backup-files nil)
+ '(menu-bar-mode nil)
+ '(scroll-bar-mode nil)
+ '(show-paren-mode t)
+ '(show-paren-style (quote parenthesis))
+ '(show-trailing-whitespace t)
+ '(tool-bar-mode nil)
+ '(transient-mark-mode t)
+ '(uniquify-buffer-name-style (quote forward) nil (uniquify)))
+(custom-set-faces)
