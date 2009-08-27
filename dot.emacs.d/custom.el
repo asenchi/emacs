@@ -1,6 +1,4 @@
-;; --------------------
 ;; custom
-;; --------------------
 (custom-set-variables
  '(auto-save-mode t)
  '(column-number-mode t)

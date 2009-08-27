@@ -1,9 +1,9 @@
-This repo is for those who are just getting started with Emacs. The
-configuration is based around programming in Lisp but offers some
-other features.  I use Emacs on OpenBSD, FreeBSD and Mac OS X so there
-are some personal settings in there to reflect different installation
-locations.  Simply change the path on those and you'll be all set.
 
-Works best with SBCL, Redshank, paredit and SLIME.
+Branch: oldsetup
+This was my older setup, I decided to start from scratch and get a good
+working small system in place.
 
-Good luck.
+Branch: master
+This is my current setup.  Will be adding some features.
+
+Both of these just symlink any dir or file name dot.* to ~/.*.
