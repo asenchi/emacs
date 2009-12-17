@@ -8,6 +8,20 @@
 (add-auto-mode 'perl-mode "\\.pl$")
 (add-auto-mode 'lisp-mode "\\.emacs$")
 
+(add-auto-mode 'rst-mode "\\.rst$")
+(add-auto-mode 'rst-mode "\\.rest$")
+
+;; python
+(autoload 'python-mode "python-mode" "Python Mode." t)
+(add-auto-mode 'python-mode "\\.py\\'")
+(add-to-list 'interpreter-mode-alist '("python" . python-mode))
+
+(add-hook 'python-mode-hook
+          (lambda ()
+            (set (make-variable-buffer-local 'beginning-of-defun-function)
+                 'py-beginning-of-def-or-class)
+            (setq outline-regexp "def\\|class ")))
+
 ;; ruby
 (add-auto-mode 'ruby-mode "\\.rake$")
 (add-auto-mode 'ruby-mode "Rakefile$")

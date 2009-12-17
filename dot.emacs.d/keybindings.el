@@ -8,9 +8,9 @@
 (global-set-key "\C-x\C-b" 'ibuffer)
 (global-set-key "\C-xm" 'eshell)
 (global-set-key "\C-xg" 'magit-status)
-(global-set-key [(control meta return)] 'toggle-fullscreen)
+(global-set-key [(control return)] 'toggle-fullscreen)
 (global-set-key "\C-cd" 'toggle-current-window-dedication)
-(global-set-key "\C-x\C-b" 'buffer-menu)
+;(global-set-key "\C-x\C-b" 'buffer-menu)
 
 ;; magit
 (global-set-key "\C-cm" 'magit-status)

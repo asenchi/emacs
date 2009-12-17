@@ -15,11 +15,20 @@
 
 ;; vendor
 (require 'cl)
-(require 'git)
-(require 'linum)
+;(require 'linum)
 (require 'paredit)
 (require 'magit)
 (require 'yasnippet)
+(require 'rst)
+
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'forward)
+
+(setq ipython-command "/usr/local/bin/ipython")
+(require 'python-mode)
+(require 'ipython)
+
+(setq py-python-command-args '( "-colors" "Linux"))
 
 ;; yasnippet requirements
 (yas/initialize)
@@ -35,11 +44,11 @@
 
 (if (eq system-type 'darwin)
     (set-default-font
-     "-apple-inconsolata-medium-r-normal--14-0-72-72-m-0-iso10646-1"))
+     "-apple-inconsolata-medium-r-normal--16-0-72-72-m-0-iso10646-1"))
 
-(if (eq window-system 'x)
-    (set-default-font "Inconsolata-12")
-  (set-default-font "Terminus-12"))
+;(if (eq window-system 'x)
+;    (set-default-font "Inconsolata-16")
+;  (set-default-font "Terminus-12"))
 
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)

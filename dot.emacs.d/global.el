@@ -1,4 +1,6 @@
 
+(set-face-bold-p 'font-lock-keyword-face t)
+(set-face-italic-p 'font-lock-comment-face t)
 (setq-default tab-width 4)
 (setq-default indent-tabs-mode nil)
 (prefer-coding-system 'utf-8)
