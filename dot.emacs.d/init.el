@@ -15,12 +15,17 @@
 
 ;; vendor
 (require 'cl)
-;(require 'linum)
 (require 'paredit)
-;(require 'magit)
 (require 'yasnippet)
 (require 'rst)
 (require 'egg)
+(require 'org-install)
+(require 'ido)
+
+(ido-mode t)
+
+;(require 'linum)
+;(require 'magit)
 
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
@@ -45,11 +50,10 @@
 
 (if (eq system-type 'darwin)
     (set-default-font
-     "-apple-inconsolata-medium-r-normal--16-0-72-72-m-0-iso10646-1"))
+     "-apple-inconsolata-medium-r-normal--14-0-72-72-m-0-iso10646-1"))
 
 (if (eq window-system 'x)
-    (set-default-font "Inconsolata-12")
-  (set-default-font "Terminus-12"))
+    (set-default-font "Inconsolata-10"))
 
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)

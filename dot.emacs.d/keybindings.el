@@ -14,9 +14,10 @@
 
 (global-set-key "\M-/" 'hippie-expand)
 
-(global-set-key [M-left] 'windmove-left)
-(global-set-key [M-right] 'windmove-right)
-(global-set-key [M-up] 'windmove-up)
-(global-set-key [M-down] 'windmove-down)
+;; org-mode
+(global-set-key "\C-cl" 'org-store-link)
+(global-set-key "\C-ca" 'org-agenda)
+(global-set-key "\C-cb" 'org-iswitchb)
+
 
 (provide 'keybindings)
