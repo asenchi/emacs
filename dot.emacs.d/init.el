@@ -17,7 +17,7 @@
 (require 'cl)
 ;(require 'linum)
 (require 'paredit)
-(require 'magit)
+;(require 'magit)
 (require 'yasnippet)
 (require 'rst)
 (require 'egg)
