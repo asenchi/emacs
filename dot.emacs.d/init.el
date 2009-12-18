@@ -17,9 +17,10 @@
 (require 'cl)
 ;(require 'linum)
 (require 'paredit)
-(require 'magit)
+;(require 'magit)
 (require 'yasnippet)
 (require 'rst)
+(require 'egg)
 
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
