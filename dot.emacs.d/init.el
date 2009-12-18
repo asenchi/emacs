@@ -20,7 +20,7 @@
 (require 'magit)
 (require 'yasnippet)
 (require 'rst)
-;(require 'egg)
+(require 'egg)
 
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
