@@ -12,7 +12,11 @@
 (global-set-key "\C-cd" 'toggle-current-window-dedication)
 ;(global-set-key "\C-x\C-b" 'buffer-menu)
 
-;; magit
-(global-set-key "\C-cm" 'magit-status)
+(global-set-key "\M-/" 'hippie-expand)
+
+(global-set-key [M-left] 'windmove-left)
+(global-set-key [M-right] 'windmove-right)
+(global-set-key [M-up] 'windmove-up)
+(global-set-key [M-down] 'windmove-down)
 
 (provide 'keybindings)
