@@ -5,6 +5,7 @@
 (add-to-list 'load-path "~/.emacs.d")
 (add-to-list 'load-path "~/.emacs.d/vendor")
 (add-to-list 'load-path "~/.emacs.d/vendor/yasnippet")
+(add-to-list 'load-path "~/.emacs.d/vendor/org-mode")
 (add-to-list 'load-path "~/.emacs.d/color-themes")
 
 ;; customizations
@@ -12,6 +13,7 @@
 (require 'functions)
 (require 'keybindings)
 (require 'modes)
+(require 'mode-org)
 
 ;; vendor
 (require 'cl)
@@ -19,10 +21,13 @@
 (require 'yasnippet)
 (require 'rst)
 (require 'egg)
-(require 'org-install)
 (require 'ido)
-
 (ido-mode t)
+
+(require 'org-install)
+(require 'org-babel-init)
+(require 'org-babel-python)
+(org-babel-load-library-of-babel)
 
 ;(require 'linum)
 ;(require 'magit)
@@ -50,7 +55,7 @@
 
 (if (eq system-type 'darwin)
     (set-default-font
-     "-apple-inconsolata-medium-r-normal--14-0-72-72-m-0-iso10646-1"))
+     "-apple-inconsolata-medium-r-normal--16-0-72-72-m-0-iso10646-1"))
 
 (if (eq window-system 'x)
     (set-default-font "Inconsolata-10"))

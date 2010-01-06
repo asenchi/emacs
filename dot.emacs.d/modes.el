@@ -11,27 +11,6 @@
 (add-auto-mode 'rst-mode "\\.rst$")
 (add-auto-mode 'rst-mode "\\.rest$")
 
-;; org-mode
-(add-auto-mode 'org-mode '("\\.\\(org\\|org_archive\\|txt\\)$")
-;(add-to-list 'load-path "~/org-mode")
-
-(setq org-agenda-files (quote ("~/org-mode/remember.org"
-                               "~/org-mode/todo.org"
-                               "~/org-mode/house.org"
-                               "~/org-mode/groceries.org"
-                               "~/org-mode/family.org"
-                               "~/org-mode/projectcloud.org"
-                               "~/org-mode/NATALIEDRAPER.org"
-                               "~/org-mode/ASENCHI.org")))
-
-(setq org-default-notes-file "~/org-mode/remember.org")
-;;;  Load Org Remember Stuff
-(require 'remember)
-(org-remember-insinuate)
-;; I use C-M-r to start org-remember
-(global-set-key (kbd "C-M-r") 'org-remember)
-(setq org-remember-store-without-prompt t)
-
 ;; python
 (autoload 'python-mode "python-mode" "Python Mode." t)
 (add-auto-mode 'python-mode "\\.py\\'")
@@ -57,10 +36,5 @@
   '(progn
      (set-face-foreground 'diff-added "green4")
      (set-face-foreground 'diff-removed "red3")))
-
-(eval-after-load 'magit
-  '(progn
-     (set-face-foreground 'magit-diff-add "green3")
-     (set-face-foreground 'magit-diff-del "red3")))
 
 (provide 'modes)
