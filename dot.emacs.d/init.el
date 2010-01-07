@@ -6,6 +6,7 @@
 (add-to-list 'load-path "~/.emacs.d/vendor")
 (add-to-list 'load-path "~/.emacs.d/vendor/yasnippet")
 (add-to-list 'load-path "~/.emacs.d/vendor/org-mode")
+(add-to-list 'load-path "~/.emacs.d/vendor/org-mode/contrib/lisp")
 (add-to-list 'load-path "~/.emacs.d/color-themes")
 
 ;; customizations

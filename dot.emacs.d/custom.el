@@ -18,7 +18,7 @@
  '(line-number-mode t)
  '(make-backup-files nil)
  '(menu-bar-mode nil)
- '(org-agenda-files (quote ("~/org-mode/asenchi.org" "~/org-mode/todo.org" "~/org-mode/refile.org" "~/org-mode/projectcloud.org" "~/org-mode/house.org" "~/org-mode/groceries.org" "~/org-mode/family.org" "~/org-mode/ASENCHI.org")))
+ '(org-agenda-files (quote ("~/org/learning.org" "~/org/asenchi.org" "~/org/todo.org" "~/org/refile.org" "~/org/projectcloud.org" "~/org/house.org" "~/org/groceries.org" "~/org/family.org")))
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
  '(show-paren-style (quote parenthesis))

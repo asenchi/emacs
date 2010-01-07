@@ -14,15 +14,4 @@
 
 (global-set-key "\M-/" 'hippie-expand)
 
-;; org-mode
-(global-set-key "\C-ca" 'org-agenda)
-(global-set-key (kbd "<f7>") 'org-agenda)
-(global-set-key (kbd "<f7> c") 'calendar)
-(global-set-key (kbd "C-M-r") 'org-remember)
-
-(global-set-key "\C-cl" 'org-store-link)
-(global-set-key "\C-cb" 'org-iswitchb)
-(global-set-key (kbd "<f6>") 'org-cycle-agenda-files)
-
-
 (provide 'keybindings)
