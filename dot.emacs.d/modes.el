@@ -53,14 +53,14 @@
      (set-face-foreground 'diff-removed "red3")))
 
 ;; org-mode
-(setq *org-path* (concat *home-path* "emacs/org"))
+(setq *org-path* (concat *home-path* "/emacs/org"))
 
 (add-auto-mode 'org-mode '"\\.org$")
 (add-auto-mode 'org-mode '"\\.org_archive$")
 
 (add-to-list 'load-path *org-path*)
 (setq org-startup-indented t)
-(setq org-default-notes-file (concat *org-path* "/refile.org")
+(setq org-default-notes-file (concat *org-path* "/refile.org"))
 
 (require 'remember)
 (org-remember-insinuate)

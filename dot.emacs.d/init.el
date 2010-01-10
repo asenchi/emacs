@@ -4,13 +4,19 @@
 ;; Some default variables
 (setq *home-path* (expand-file-name "~"))
 (setq *emacs-path* (concat *home-path* "/.emacs.d"))
-(setq *vendor-path* (concat *home-path* "emacs/vendor"))
-(setq *custom-file* (concat *emacs-path* "/custom.el")
+(setq *vendor-path* (concat *home-path* "/emacs/vendor"))
+(setq *custom-file* (concat *emacs-path* "/custom.el"))
 
 ;; Load the follow paths
-(add-to-list 'load-path *emacs-path*)
-(add-to-list 'load-path (concat *emacs-path* "/color-themes")))
-(add-to-list 'load-path *vendor-path*)
+(setq load-path
+      (append (list nil *emacs-path*
+		    (concat *emacs-path* "/color-themes")
+		    *vendor-path*)
+		    load-path))
+
+;; (add-to-list 'load-path *emacs-path*)
+;; (add-to-list 'load-path (concat *emacs-path* "/color-themes")))
+;; (add-to-list 'load-path *vendor-path*)
 (progn
   (cd *vendor-path*)
   (normal-top-level-add-subdirs-to-load-path))
@@ -48,7 +54,7 @@
 
 ;; yasnippet requirements
 (yas/initialize)
-(yas/load-directory "~/.emacs.d/vendor/yasnippet/snippets")
+(yas/load-directory (concat *vendor-path* "/yasnippet/snippets"))
 (setq yas/prompt-functions
       '(yas/x-prompt
         yas/dropdown-prompt))
@@ -58,6 +64,5 @@
 (require 'functions)
 (require 'keybindings)
 (require 'modes)
-(require 'orgmode)
 
 (provide 'init)
