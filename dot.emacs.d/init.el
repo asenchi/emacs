@@ -1,27 +1,34 @@
 ;; -*- mode: Emacs-Lisp -*-
 ;; -*- coding: utf-8 -*-
 
-;; LOAD PATHS
-(add-to-list 'load-path "~/.emacs.d")
-(add-to-list 'load-path "~/.emacs.d/vendor")
-(add-to-list 'load-path "~/.emacs.d/vendor/yasnippet")
-(add-to-list 'load-path "~/.emacs.d/vendor/org-mode")
-(add-to-list 'load-path "~/.emacs.d/vendor/org-mode/contrib/lisp")
-(add-to-list 'load-path "~/.emacs.d/color-themes")
+;; Some default variables
+(setq *home-path* (expand-file-name "~"))
+(setq *emacs-path* (concat *home-path* "/.emacs.d"))
+(setq *vendor-path* (concat *home-path* "emacs/vendor"))
+(setq *custom-file* (concat *emacs-path* "/custom.el")
 
-;; customizations
-(require 'global)
-(require 'functions)
-(require 'keybindings)
-(require 'modes)
-(require 'orgmode)
+;; Load the follow paths
+(add-to-list 'load-path *emacs-path*)
+(add-to-list 'load-path (concat *emacs-path* "/color-themes")))
+(add-to-list 'load-path *vendor-path*)
+(progn
+  (cd *vendor-path*)
+  (normal-top-level-add-subdirs-to-load-path))
 
-;; vendor
+;; Looks for configurations named after system hostname.
+(setq system-specific-config
+      (concat *emacs-path* (car (split-string system-name "\\.")) ".el"))
+(if (file-exists-p system-specific-config) (load system-specific-config))
+
+(load *custom-file* 'noerror)
+
+;; vendors
 (require 'cl)
 (require 'paredit)
 (require 'yasnippet)
 (require 'rst)
 (require 'egg)
+
 (require 'textmate)
 (textmate-mode)
 
@@ -33,16 +40,10 @@
 (require 'org-babel-python)
 (org-babel-load-library-of-babel)
 
-;(require 'linum)
-;(require 'magit)
-
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
 
-(setq ipython-command "/usr/local/bin/ipython")
 (require 'python-mode)
-(require 'ipython)
-
 (setq py-python-command-args '( "-colors" "Linux"))
 
 ;; yasnippet requirements
@@ -52,19 +53,11 @@
       '(yas/x-prompt
         yas/dropdown-prompt))
 
-;(load "django-mode.el")
+;; customizations
+(require 'global)
+(require 'functions)
+(require 'keybindings)
+(require 'modes)
+(require 'orgmode)
 
-(load "color-theme-almost-monokai")
-(color-theme-almost-monokai)
-
-(if (eq system-type 'darwin)
-    (set-default-font
-     "-apple-inconsolata-medium-r-normal--16-0-72-72-m-0-iso10646-1"))
-
-(if (eq window-system 'x)
-    (set-default-font "Inconsolata-10"))
-
-(setq custom-file "~/.emacs.d/custom.el")
-(load custom-file)
-
-(put 'dired-find-alternate-file 'disabled nil)
+(provide 'init)
