@@ -18,7 +18,7 @@
  '(line-number-mode t)
  '(make-backup-files nil)
  '(menu-bar-mode nil)
- '(org-agenda-files (quote ("~/org/learning.org" "~/org/asenchi.org" "~/org/todo.org" "~/org/refile.org" "~/org/projectcloud.org" "~/org/house.org" "~/org/groceries.org" "~/org/family.org")))
+ '(org-agenda-files (quote ("~/emacs/org/learning.org" "~/emacs/org/asenchi.org" "~/emacs/org/todo.org" "~/emacs/org/refile.org" "~/emacs/org/projectcloud.org" "~/emacs/org/house.org" "~/emacs/org/groceries.org" "~/emacs/org/family.org")))
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
  '(show-paren-style (quote parenthesis))
