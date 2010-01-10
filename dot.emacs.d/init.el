@@ -14,7 +14,7 @@
 (require 'functions)
 (require 'keybindings)
 (require 'modes)
-(require 'mode-org)
+(require 'orgmode)
 
 ;; vendor
 (require 'cl)
@@ -22,6 +22,9 @@
 (require 'yasnippet)
 (require 'rst)
 (require 'egg)
+(require 'textmate)
+(textmate-mode)
+
 (require 'ido)
 (ido-mode t)
 

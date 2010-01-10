@@ -1,3 +1,5 @@
+(when (equal system-type 'darwin)
+  (setenv "PATH" (contact "/User/asenchi/local/bin" (getenv "PATH"))))
 
 (set-face-bold-p 'font-lock-keyword-face t)
 (set-face-italic-p 'font-lock-comment-face t)

@@ -2,12 +2,12 @@
 (defun insert-date-long ()
   "Insert date at cursor."
   (interactive)
-  (insert (format-time-string "%a %b %e, %Y %l:%M %p")))
+  (insert (format-time-string "%c" (current-time))))
 
 (defun insert-date-short ()
   "Insert date at cursor."
   (interactive)
-  (insert (format-time-string "%Y-%m-%d:%H:%M")))
+  (insert (format-time-string "%Y%m%d-%H:%M" (current-time))))
 
 (defun toggle-fullscreen ()
   "Toggle full screen."
@@ -62,5 +62,16 @@
     (if mark-active (list (region-beginning) (region-end))
       (list (line-beginning-position)
         (line-beginning-position 2)))))
+
+(defun lorem ()
+  "Insert a lorem ipsum."
+  (interactive)
+  (insert "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do "
+          "eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim"
+          "ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut "
+          "aliquip ex ea commodo consequat. Duis aute irure dolor in "
+          "reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla "
+          "pariatur. Excepteur sint occaecat cupidatat non proident, sunt in "
+          "culpa qui officia deserunt mollit anim id est laborum."))
 
 (provide 'functions)
