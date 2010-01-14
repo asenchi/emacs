@@ -2,8 +2,10 @@
 ;; -*- coding: utf-8 -*-
 
 ;; some options
-
 (put 'dired-find-alternate-file 'disabled nil)
+
+;; spaces, not tabs
+(setq-default indent-tabs-mode nil)
 
 ;; bold keywords
 (set-face-bold-p 'font-lock-keyword-face t)

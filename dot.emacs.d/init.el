@@ -52,6 +52,8 @@
 (require 'python-mode)
 (setq py-python-command-args '( "-colors" "Linux"))
 
+(require 'whitespace)
+
 ;; yasnippet requirements
 (yas/initialize)
 (yas/load-directory (concat *vendor-path* "/yasnippet/snippets"))

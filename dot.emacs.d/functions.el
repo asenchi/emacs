@@ -106,4 +106,13 @@
    nil
    '(("\\<\\(TODO\\|XXX\\|BUG\\):" 1 font-lock-warning-face t))))
 
+(defun asenchi/format-python ()
+  "untabify and wrap python comments"
+  (interactive)
+  (untabify (point-min) (point-max))
+  (goto-char (point-min))
+  (while (re-search-forward comment-start nil t)
+    (call-interactively 'fill-paragraph)
+    (forward-line 1)))
+
 (provide 'functions)

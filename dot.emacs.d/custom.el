@@ -12,7 +12,6 @@
  '(egg-git-command "/usr/local/git/bin/git")
  '(global-font-lock-mode t)
  '(ibuffer-enable t)
- '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(ispell-program-name "aspell")
  '(line-number-mode t)

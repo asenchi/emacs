@@ -21,6 +21,7 @@
   (setq indent-tabs-mode t)
   (auto-fill-mode 1)
   (turn-on-eldoc-mode)
+  (setq fill-column 79)
 
   (define-key python-mode-map "\"" 'electric-pair)
   (define-key python-mode-map "\'" 'electric-pair)
@@ -34,6 +35,7 @@
                  'py-beginning-of-def-or-class)
             (setq outline-regexp "def\\|class ")))
 (add-hook 'python-mode-hook 'asenchi/python-mode-hook)
+(add-hook 'python-mode-hook 'asenchi/format-python)
 (add-hook 'python-mode-hook 'asenchi/show-keywords)
 
 ;; ruby

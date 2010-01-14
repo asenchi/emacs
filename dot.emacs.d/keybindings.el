@@ -10,4 +10,7 @@
 (global-set-key [(control return)] 'toggle-fullscreen)
 (global-set-key "\M-/" 'hippie-expand)
 
+(global-set-key "\C-xw" 'whitespace-mode)
+(global-set-key "\C-xt" 'untabify-buffer)
+
 (provide 'keybindings)
