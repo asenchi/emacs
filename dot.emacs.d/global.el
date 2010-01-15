@@ -26,7 +26,7 @@
 ;; easy typing
 (fset 'yes-or-no-p 'y-or-n-p)
 
-;; show tat least 5 lines
+;; show at least 5 lines
 (setq window-min-height 5)
 
 ;; highlight current line
@@ -55,5 +55,12 @@
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 (add-hook 'after-save-hook 'autocompile-init)
+
+;; set file registers
+(set-register ?i '(file . "~/.emacs.d/init.el"))
+(set-register ?g '(file . "~/.emacs.d/global.el"))
+(set-register ?m '(file . "~/.emacs.d/modes.el"))
+(set-register ?P '(file . "~/emacs/org/projectcloud.org"))
+(set-register ?C '(file . "~/tmp/emacs-cheat.txt"))
 
 (provide 'global)

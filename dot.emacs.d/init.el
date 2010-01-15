@@ -4,7 +4,7 @@
 ;; Some default variables
 (setq *home-path* (expand-file-name "~"))
 (setq *emacs-path* (concat *home-path* "/.emacs.d"))
-(setq *vendor-path* (concat *home-path* "/emacs/vendor"))
+(setq *vendor-path* (concat *emacs-path* "/vendor"))
 (setq *custom-file* (concat *emacs-path* "/custom.el"))
 
 ;; Load the follow paths
