@@ -54,7 +54,7 @@
      "-apple-inconsolata-medium-r-normal--18-0-72-72-m-0-iso10646-1"))
 
 (if (eq window-system 'x)
-    (set-default-font "Inconsolata-10"))
+    (set-default-font "Inconsolata-14"))
 
 ;; hooks
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
