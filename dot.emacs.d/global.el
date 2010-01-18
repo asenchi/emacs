@@ -15,7 +15,6 @@
 
 ;; default tab width 4
 (setq-default tab-width 4)
-(setq-default indent-tabs-mode nil)
 
 ;; utf-8
 (prefer-coding-system 'utf-8)
@@ -39,14 +38,20 @@
 ;; get rid of backup files
 (setq backup-inhibited t)
 
+;; merge the kill-ring w/ clipboard
+(setq x-select-enable-clipboard t)
+
+
 ;; colors
-(load "color-theme-almost-monokai")
-(color-theme-almost-monokai)
+;; (load "color-theme-almost-monokai")
+;; (color-theme-almost-monokai)
+(load "color-theme-chocolate-rain")
+(color-theme-chocolate-rain)
 
 ;; fonts
 (if (eq system-type 'darwin)
     (set-default-font
-     "-apple-inconsolata-medium-r-normal--16-0-72-72-m-0-iso10646-1"))
+     "-apple-inconsolata-medium-r-normal--18-0-72-72-m-0-iso10646-1"))
 
 (if (eq window-system 'x)
     (set-default-font "Inconsolata-10"))

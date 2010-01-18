@@ -18,10 +18,10 @@
 (defun asenchi/python-mode-hook ()
   (setq tab-width 4)
   (local-set-key [return] 'newline-and-indent)
-  (setq indent-tabs-mode t)
+  (setq indent-tabs-mode nil)
   (auto-fill-mode 1)
   (turn-on-eldoc-mode)
-  (setq fill-column 79)
+  ;(setq fill-column 79)
 
   (define-key python-mode-map "\"" 'electric-pair)
   (define-key python-mode-map "\'" 'electric-pair)
@@ -56,20 +56,48 @@
 
 ;; org-mode
 (setq *org-path* (concat *home-path* "/emacs/org"))
+(add-to-list 'load-path *org-path*)
 
 (add-auto-mode 'org-mode '"\\.org$")
 (add-auto-mode 'org-mode '"\\.org_archive$")
 
-(add-to-list 'load-path *org-path*)
-(setq org-startup-indented t)
-(setq org-default-notes-file (concat *org-path* "/refile.org"))
+(setq org-export-htmlize-output-type 'css)
+(setq org-startup-indented t
+      org-ellipsis "..."
+      org-hide-leading-stars t
+      org-fontify-done-headline t
+      org-fontify-emphasized-text t)
+(setq org-default-notes-file (concat *org-path* "/default.org"))
 
 (require 'remember)
 (org-remember-insinuate)
-(setq org-remember-store-without-prompt t)
-(setq org-remember-default-headline "Tasks")
-(setq org-use-fast-todo-selection t)
-(setq org-treat-S-cursor-todo-selection-as-state-change nil)
+(setq org-remember-store-without-prompt t
+      org-remember-default-headline "Tasks"
+      org-log-done t
+      org-use-fast-todo-selection t
+      org-treat-S-cursor-todo-selection-as-state-change nil)
+
+(setq org-agenda-files
+      '("~/emacs/org/default.org"
+        "~/emacs/org/bookmarks.org"
+        "~/emacs/org/family.org"
+        "~/emacs/org/groceries.org"
+        "~/emacs/org/house.org"
+        "~/emacs/org/learning.org"
+        "~/emacs/org/notes.org"
+        "~/emacs/org/projectcloud.org"
+        "~/emacs/org/quotes.org"
+        "~/emacs/org/todo.org"))
+
+(setq org-refile-targets '((org-agenda-files (:maxlevel 5))))
+(setq org-refile-use-outline-path t)
+(setq org-use-tag-inheritance t
+      org-use-property-inheritance t)
+
+(global-set-key "\C-ca" 'org-agenda)
+(global-set-key "\C-cr" 'org-remember)
+(global-set-key "\C-cl" 'org-store-link)
+(global-set-key "\C-cb" 'org-iswitchb)
 
 (setq org-tag-alist
       '(("family" . ?f)
@@ -80,36 +108,37 @@
         ("code" . ?c)))
 
 (setq org-todo-keywords
-      '((sequence "TODO(t)" "|" "DONE(d!/!)" "CANCELLED(c!/!)")
-        (sequence "TASK(f)" "|" "DONE(d!/!)")
-        (sequence "WRITE(w)" "TEST(s@/!)" "DEPLOY(D@/!)" "|" "DONE(d!/!)")))
+      '((sequence "TODO(t)" "|" "DONE(d!/!)")
+        (sequence "CODE(c)"
+                  "INPROG(s@/!)"
+                  "TEST(s@/!)"
+                  "DEPLOY(D@/!)"
+                  "|" "DONE(d!/!)")))
 
 (setq org-todo-keyword-faces
       '(("TODO" . (:foreground "DarkOrange1" :weight bold))
-        ("TASK" . (:foreground "blue"))
+        ("INPROG" . (:foreground "blue" :weight bold))
         ("TEST" . (:foreground "red"))
         ("DEPLOY" . (:foreground "light blue"))
         ("DONE" . (:foreground "light sea green"))
         ("CANCELLED" . (:foreground "forestgreen"))))
 
 (setq org-remember-templates
-      '(("Note" ?n
-         "* %^{Title}\n :PROPERTIES:\n :on: %T\n :END:\n %?\n %x"
+      '(("Todo" ?t
+         "* TODO %^{Title}\n :PROPERTIES:\n :on: %U\n :END:\n %?\n %a"
          nil date-tree)
+        ("Note" ?n
+         "* %^{Title}\n :PROPERTIES:\n :on: %U\n :tags: %^G\n :END:\n %?\n %x"
+         "~/emacs/org/notes.org" "Notes")
         ("Learn" ?l
-         "* LEARNLOG %^{Title}\n :PROPERTIES:\n :on: %T\n :tags: %^g\n :END:\n %^{Description}\n"
+         "** %^{Item}\n :PROPERTIES:\n :on: %U\n :tags: %^G\n :END:\n %^{Description}\n"
          "~/org/learning.org" date-tree)
-        ("Todo" ?t
-         "* TODO %^{Title}\n :PROPERTIES:\n :on: %T\n :END:\n %?\n %a"
-         nil date-tree)
-        ("Bookmark" ?b "* [[%^{URL}][%^{Description}]]\n" nil "Bookmarks")))
+        ("Quote" ?q
+         "** %^{Quote} - %^{Author} %u %^G\n"
+         "~/emacs/org/quotes.org" "Quotes")
+        ("Bookmark" ?b
+         "* ([%^{URL}] %^{Description} %U)\n"
+         "~/emacs/org/bookmarks.org" "Bookmarks")))
 
-(global-set-key "\C-ca" 'org-agenda)
-;(global-set-key (kbd "<f7>") 'org-agenda)
-;(global-set-key (kbd "<f7> c") 'calendar)
-(global-set-key "\C-cr" 'org-remember)
-(global-set-key "\C-cl" 'org-store-link)
-(global-set-key "\C-cb" 'org-iswitchb)
-;(global-set-key (kbd "<f6>") 'org-cycle-agenda-files)
 
 (provide 'modes)

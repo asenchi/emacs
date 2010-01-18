@@ -115,4 +115,12 @@
     (call-interactively 'fill-paragraph)
     (forward-line 1)))
 
+(defadvice kill-ring-save (before slick-copy activate compile)
+  "When called interactively with no active region, copy a single line instead."
+  (interactive
+   (if mark-active (list (region-beginning) (region-end))
+     (message "Copied line")
+     (list (line-beginning-position)
+           (line-beginning-position 2)))))
+
 (provide 'functions)
