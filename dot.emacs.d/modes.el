@@ -22,7 +22,6 @@
   (auto-fill-mode 1)
   (turn-on-eldoc-mode)
   ;(setq fill-column 79)
-
   (define-key python-mode-map "\"" 'electric-pair)
   (define-key python-mode-map "\'" 'electric-pair)
   (define-key python-mode-map "(" 'electric-pair)
@@ -35,7 +34,6 @@
                  'py-beginning-of-def-or-class)
             (setq outline-regexp "def\\|class ")))
 (add-hook 'python-mode-hook 'asenchi/python-mode-hook)
-(add-hook 'python-mode-hook 'asenchi/format-python)
 (add-hook 'python-mode-hook 'asenchi/show-keywords)
 
 ;; ruby
@@ -67,7 +65,7 @@
       org-hide-leading-stars t
       org-fontify-done-headline t
       org-fontify-emphasized-text t)
-(setq org-default-notes-file (concat *org-path* "/default.org"))
+(setq org-default-notes-file (concat *org-path* "/remember.org"))
 
 (require 'remember)
 (org-remember-insinuate)
@@ -78,7 +76,7 @@
       org-treat-S-cursor-todo-selection-as-state-change nil)
 
 (setq org-agenda-files
-      '("~/emacs/org/default.org"
+      '("~/emacs/org/remember.org"
         "~/emacs/org/bookmarks.org"
         "~/emacs/org/family.org"
         "~/emacs/org/groceries.org"
@@ -86,53 +84,82 @@
         "~/emacs/org/learning.org"
         "~/emacs/org/notes.org"
         "~/emacs/org/projectcloud.org"
+        "~/emacs/org/projects.org"
         "~/emacs/org/quotes.org"
-        "~/emacs/org/todo.org"))
+        "~/emacs/org/todo.org"
+        "~/emacs/org/work.org"))
 
-(setq org-refile-targets '((org-agenda-files (:maxlevel 5))))
 (setq org-refile-use-outline-path t)
 (setq org-use-tag-inheritance t
       org-use-property-inheritance t)
+(setq org-remember-clock-out-on-exit nil)
+(setq org-completion-use-ido t)
+(setq org-refile-targets
+      (quote ((org-agenda-files :maxlevel . 5) (nil :maxlevel . 5))))
+(setq org-refile-use-outline-path (quote file))
+(setq org-outline-path-complete-in-steps t)
+(setq org-refile-allow-creating-parent-nodes (quote confirm))
+(setq org-archive-mark-done nil)
 
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cr" 'org-remember)
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-cb" 'org-iswitchb)
 
-(setq org-tag-alist
-      '(("family" . ?f)
-        ("projectcloud" . ?p)
-        ("study" . ?S)
-        ("house" . ?h)
-        ("financs" . ?F)
-        ("code" . ?c)))
-
 (setq org-todo-keywords
-      '((sequence "TODO(t)" "|" "DONE(d!/!)")
-        (sequence "CODE(c)"
-                  "INPROG(s@/!)"
-                  "TEST(s@/!)"
-                  "DEPLOY(D@/!)"
-                  "|" "DONE(d!/!)")))
+      '((sequence "TODO(t)" "STARTED(s!)" "|" "DONE(d!/!)")
+        (sequence
+         "IDEA(c)" "STARTED(S!)" "TEST(T)" "DEPLOY(D)" "|" "DONE(d!/!)")
+        ))
 
 (setq org-todo-keyword-faces
       '(("TODO" . (:foreground "DarkOrange1" :weight bold))
-        ("INPROG" . (:foreground "blue" :weight bold))
+        ("STARTED" . (:foreground "blue" :weight bold))
         ("TEST" . (:foreground "red"))
         ("DEPLOY" . (:foreground "light blue"))
         ("DONE" . (:foreground "light sea green"))
-        ("CANCELLED" . (:foreground "forestgreen"))))
+        ))
+
+(setq org-todo-state-tags-triggers
+      (quote (("WAITING" ("WAITING" . t) ("NEXT"))
+              (done ("WAITING") ("NEXT") ("TEST") ("DEPLOY"))
+              ("TODO" ("WAITING") ("NEXT") ("TEST") ("DEPLOY"))
+              ("DONE" ("WAITING") ("NEXT") ("TEST") ("DEPLOY"))
+              ("STARTED" ("WAITING"))
+              ("TEST" ("TEST" . t))
+              ("DEPLOY" ("DEPLOY" . t) ("TEST"))
+              )))
+
+(setq org-tag-alist (quote ((:startgroup)
+                            ("@errand" . ?e)
+                            ("@work" . ?o)
+                            ("@home" . ?h)
+                            ("@coffeeshop" . ?c)
+                            (:endgroup)
+                            ("NEXT" . ?n)
+                            ("WAITING" . ?w)
+                            ("HOME" . ?H)
+                            ("LEARN" . ?l)
+                            ("PROJECT" . ?p)
+                            ("PROJECTCLOUD" . ?P)
+                            ("WORK" . ?O)
+                            ("TEST" . ?t)
+                            ("DEPLOY" . ?d))))
+
+
+(defun asenchi/clock-in-to-started (kw)
+  "Switch task from TODO to STARTED when clocking in"
+  (if (and (string-equal kw "TODO")
+           (not (string-equal (buffer-name) "*Remember*")))
+      "STARTED"
+    nil))
+(setq org-clock-in-switch-to-state 'asenchi/clock-in-to-started)
 
 (setq org-remember-templates
-      '(("Todo" ?t
-         "* TODO %^{Title}\n :PROPERTIES:\n :on: %U\n :END:\n %?\n %a"
-         nil date-tree)
-        ("Note" ?n
-         "* %^{Title}\n :PROPERTIES:\n :on: %U\n :tags: %^G\n :END:\n %?\n %x"
-         "~/emacs/org/notes.org" "Notes")
-        ("Learn" ?l
-         "** %^{Item}\n :PROPERTIES:\n :on: %U\n :tags: %^G\n :END:\n %^{Description}\n"
-         "~/org/learning.org" date-tree)
+      '(("todo" ?t "* TODO %^{TODO}\n %?\n %a" nil bottom nil)
+        ("note" ?n "** %^{Note} :NOTE:\n %U\n %a" nil bottom nil)
+        ("learn" ?l
+         "*** %^{Lesson} %^g\n %U\n %?\n" "~/org/learning.org" bottom nil)
         ("Quote" ?q
          "** %^{Quote} - %^{Author} %u %^G\n"
          "~/emacs/org/quotes.org" "Quotes")
@@ -140,5 +167,100 @@
          "* ([%^{URL}] %^{Description} %U)\n"
          "~/emacs/org/bookmarks.org" "Bookmarks")))
 
+(setq org-agenda-custom-commands
+      (quote (("s" "Started Tasks" todo "STARTED"
+               ((org-agenda-todo-ignore-scheduled nil)
+                (org-agenda-todo-ignore-deadlines nil)
+                (org-agenda-todo-ignore-with-date nil)))
+              ("r" "Refile New Notes and Tasks" tags "LEVEL=1+REMEMBER"
+               ((org-agenda-todo-ignore-with-date nil)
+                (org-agenda-todo-ignore-deadlines nil)
+                (org-agenda-todo-ignore-scheduled nil)))
+              ("N" "Notes" tags "NOTE" nil)
+              ("A" "Tasks to be Archived" tags "LEVEL=2/DONE|CANCELLED" nil)
+              ("p" "project(cloud)"
+               ((tags-todo "+PRIORITY=\"A\""
+                           ((org-agenda-files
+                             '("~/emacs/org/projectcloud.org"))))
+               (todo "STARTED"
+                     ((org-agenda-files '("~/emacs/org/projectcloud.org"))))
+               (tags "TEST"
+                     ((org-agenda-files '("~/emacs/org/projectcloud.org"))))
+               (tags "DEPLOY"
+                     ((org-agenda-files '("~/emacs/org/projectcloud.org"))))
+               (tags "WAITING"
+                     ((org-agenda-files '("~/emacs/org/projectcloud.org"))))
+               (tags "PROJECTCLOUD" nil)))
+              ("P" "Projects" tags "PROJECT" nil)
+              ("b" "Bookmarks" tags "BOOKMARK" nil)
+              ("q" "Quotes" tags "QUOTES" nil)
+              ("c" "Test and Deploy"
+               ((tags "TEST")
+                (tags "DEPLOY")))
+              )))
+
+;; Resume clocking tasks when emacs is restarted
+(org-clock-persistence-insinuate)
+;
+;; Yes it's long... but more is better ;)
+(setq org-clock-history-length 28)
+
+;; Resume clocking task on clock-in if the clock is open
+(setq org-clock-in-resume t)
+
+;; Change task state to STARTED when clocking in
+(setq org-clock-in-switch-to-state "STARTED")
+
+;; Separate drawers for clocking and logs
+(setq org-drawers (quote ("PROPERTIES" "LOGBOOK" "CLOCK")))
+
+;; Save clock data in the CLOCK drawer and state changes
+;; and notes in the LOGBOOK drawer
+(setq org-clock-into-drawer "CLOCK")
+
+;; Sometimes I change tasks I'm clocking quickly
+;; - this removes clocked tasks with 0:00 duration
+(setq org-clock-out-remove-zero-time-clocks t)
+
+;; Don't clock out when moving task to a done state
+(setq org-clock-out-when-done nil)
+
+;; Save the running clock and all clock history when exiting Emacs,
+;; load it on startup
+(setq org-clock-persist (quote history))
+
+;; Disable auto clock resolution
+(setq org-clock-auto-clock-resolution nil)
+
+(defun asenchi/clock-in-task-by-id (id)
+  "Clock in a task by id"
+  (require 'org-id)
+  (save-restriction
+    (widen)
+    (org-with-point-at (org-id-find id 'marker)
+      (org-clock-in nil))))
+
+(defun asenchi/clock-in-organization-task ()
+  (interactive)
+  (asenchi/clock-in-task-by-id "8822EC04-14A8-49C7-B8EA-C0228EE30BD9"))
+
+(defun asenchi/clock-in-read-news-and-email-task ()
+  (interactive)
+  (asenchi/clock-in-task-by-id "6BA66086-3663-4315-969D-44DC15739093"))
+
+(defun asenchi/clock-in-interrupted-task ()
+  "Clock in the interrupted task if there is one"
+  (interactive)
+  (if (and (not org-clock-resolving-clocks-due-to-idleness)
+           (marker-buffer org-clock-marker)
+           (marker-buffer org-clock-interrupted-task))
+      (org-with-point-at org-clock-interrupted-task
+        (org-clock-in nil))
+    (org-clock-out)))
+
+(setq org-stuck-projects
+      (quote
+       ("LEVEL=2-REFILE-WAITING|LEVEL=1+REFILE/!-DONE-CANCELLED-OPEN"
+        nil ("NEXT") "")))
 
 (provide 'modes)

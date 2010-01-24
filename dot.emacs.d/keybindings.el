@@ -15,4 +15,10 @@
 (global-set-key "\C-xw" 'whitespace-mode)
 (global-set-key "\C-xt" 'untabify-buffer)
 
+(global-set-key "\C-cM" 'asenchi/clock-in-read-news-and-email-task)
+(global-set-key "\C-cO" 'asenchi/clock-in-organization-task)
+(global-set-key "\C-c\C-o" 'org-clock-out)
+(global-set-key "\C-cN" 'org-cycle-agenda-files)
+(global-set-key "\C-cP" 'org-set-property-drawer)
+
 (provide 'keybindings)

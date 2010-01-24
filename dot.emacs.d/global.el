@@ -48,10 +48,14 @@
 (load "color-theme-chocolate-rain")
 (color-theme-chocolate-rain)
 
-;; fonts
+(if (eq system-type 'darwin)
+    (set-frame-parameter (selected-frame) 'alpha 90))
+
+
 (if (eq system-type 'darwin)
     (set-default-font
      "-apple-inconsolata-medium-r-normal--18-0-72-72-m-0-iso10646-1"))
+
 
 (if (eq window-system 'x)
     (set-default-font "Inconsolata-14"))
@@ -66,6 +70,6 @@
 (set-register ?g '(file . "~/.emacs.d/global.el"))
 (set-register ?m '(file . "~/.emacs.d/modes.el"))
 (set-register ?P '(file . "~/emacs/org/projectcloud.org"))
-(set-register ?C '(file . "~/tmp/emacs-cheat.txt"))
+(set-register ?C '(file . "~/tmp/emacs-cheatsheet.org"))
 
 (provide 'global)
