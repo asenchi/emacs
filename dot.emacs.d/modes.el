@@ -108,6 +108,7 @@
 
 (setq org-todo-keywords
       '((sequence "TODO(t)" "STARTED(s!)" "|" "DONE(d!/!)")
+        (sequence "WAITING(w)" "|" "CANCELLED(C!/!)")
         (sequence
          "IDEA(c)" "STARTED(S!)" "TEST(T)" "DEPLOY(D)" "|" "DONE(d!/!)")
         ))
@@ -184,16 +185,24 @@
                              '("~/emacs/org/projectcloud.org"))))
                (todo "STARTED"
                      ((org-agenda-files '("~/emacs/org/projectcloud.org"))))
-               (tags "TEST"
-                     ((org-agenda-files '("~/emacs/org/projectcloud.org"))))
-               (tags "DEPLOY"
-                     ((org-agenda-files '("~/emacs/org/projectcloud.org"))))
-               (tags "WAITING"
+               (tags "TEST|DEPLOY|WAITING"
                      ((org-agenda-files '("~/emacs/org/projectcloud.org"))))
                (tags "PROJECTCLOUD" nil)))
               ("P" "Projects" tags "PROJECT" nil)
               ("b" "Bookmarks" tags "BOOKMARK" nil)
               ("q" "Quotes" tags "QUOTES" nil)
+              ("w" "Work"
+               ((agenda)
+                (tags-todo "+PRIORITY=\"A\""
+                           ((org-agenda-files
+                             '("~/emacs/org/work.org"))))
+                (todo "STARTED|TODO"
+                      ((org-agenda-files
+                             '("~/emacs/org/work.org"))))
+                (tags "WAITING|TEST|DEPLOY"
+                      ((org-agenda-files
+                             '("~/emacs/org/work.org"))))
+                ))
               ("c" "Test and Deploy"
                ((tags "TEST")
                 (tags "DEPLOY")))

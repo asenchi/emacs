@@ -48,7 +48,8 @@
       (textmate-mode)
       (require 'org-babel-init)
       (require 'org-babel-python)
-      (org-babel-load-library-of-babel)))
+      (org-babel-load-library-of-babel)
+      (egg-git-command "/usr/local/git/bin/git")))
 
 ;; customizations
 (require 'global)

@@ -9,7 +9,7 @@
  '(default-major-mode (quote text-mode) t)
  '(delete-auto-save-files t)
  '(delete-old-versions t)
- '(egg-git-command "/usr/local/git/bin/git")
+ '(egg-git-command "/usr/local/bin/git")
  '(global-font-lock-mode t)
  '(ibuffer-enable t)
  '(inhibit-startup-screen t)
