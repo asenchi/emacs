@@ -60,21 +60,41 @@
           "pariatur. Excepteur sint occaecat cupidatat non proident, sunt in "
           "culpa qui officia deserunt mollit anim id est laborum."))
 
+
 (defun asenchi/isc-license ()
   "Insert ISC License"
   (interactive)
-  (insert "Copyright (c) 2010 Curt Micol <asenchi@asenchi.com>"
-          "Permission to use, copy, modify, and distribute this software for any"
-          "purpose with or without fee is hereby granted, provided that the above"
-          "copyright notice and this permission notice appear in all copies."
-          ""
-          "THE SOFTWARE IS PROVIDED 'AS IS' AND THE AUTHOR DISCLAIMS ALL WARRANTIES"
-          "WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF"
-          "MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR"
-          "ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES"
-          "WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN"
-          "ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF"
-          "OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE."))
+  (insert
+   (format
+"Copyright (c) %s %s <%s>
+Permission to use, copy, modify, and distribute this software for any
+purpose with or without fee is hereby granted, provided that the above
+copyright notice and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED 'AS IS' AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE."
+"2010" "Curt Micol" "asenchi@asenchi.com")))
+
+;; (defun asenchi/isc-license ()
+;;   "Insert ISC License"
+;;   (interactive)
+;;   (insert-and-inherit "Copyright (c) 2010 Curt Micol <asenchi@asenchi.com>\n"
+;;           "Permission to use, copy, modify, and distribute this software for any\n"
+;;           "purpose with or without fee is hereby granted, provided that the above\n"
+;;           "copyright notice and this permission notice appear in all copies.\n"
+;;           "\n"
+;;           "THE SOFTWARE IS PROVIDED 'AS IS' AND THE AUTHOR DISCLAIMS ALL WARRANTIES\n"
+;;           "WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF\n"
+;;           "MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR\n"
+;;           "ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES\n"
+;;           "WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN\n"
+;;           "ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF\n"
+;;           "OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n"))
 
 (defun maximize-frame ()
   (interactive)
