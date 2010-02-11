@@ -9,6 +9,7 @@
 (add-auto-mode 'lisp-mode "\\.emacs$")
 (add-auto-mode 'rst-mode "\\.rst$")
 (add-auto-mode 'rst-mode "\\.rest$")
+(add-auto-mode 'puppet-mode "\\.pp$")
 
 ;; python
 (autoload 'python-mode "python-mode" "Python Mode." t)
@@ -35,6 +36,13 @@
             (setq outline-regexp "def\\|class ")))
 (add-hook 'python-mode-hook 'asenchi/python-mode-hook)
 (add-hook 'python-mode-hook 'asenchi/show-keywords)
+
+(defun asenchi/html-mode-hook ()
+  (setq tab-width 4)
+  (setq indent-tabs-mode nil)
+  (setq fill-column nil))
+
+(add-hook 'html-mode-hook 'asenchi/html-mode-hook)
 
 ;; ruby
 (add-auto-mode 'ruby-mode "\\.rake$")

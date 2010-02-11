@@ -48,8 +48,8 @@
 (load "color-theme-chocolate-rain")
 (color-theme-chocolate-rain)
 
-(if (eq system-type 'darwin)
-    (set-frame-parameter (selected-frame) 'alpha 90))
+;; (if (eq system-type 'darwin)
+;;     (set-frame-parameter (selected-frame) 'alpha 90))
 
 
 (if (eq system-type 'darwin)
@@ -69,6 +69,7 @@
 (set-register ?i '(file . "~/.emacs.d/init.el"))
 (set-register ?g '(file . "~/.emacs.d/global.el"))
 (set-register ?m '(file . "~/.emacs.d/modes.el"))
+(set-register ?k '(file . "~/.emacs.d/keybindings.el"))
 (set-register ?P '(file . "~/emacs/org/projectcloud.org"))
 (set-register ?C '(file . "~/tmp/emacs-cheatsheet.org"))
 

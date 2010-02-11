@@ -32,6 +32,7 @@
 (require 'rst)
 (require 'egg)
 (require 'color-theme)
+(require 'puppet-mode)
 
 (require 'ido)
 (ido-mode t)
@@ -46,10 +47,11 @@
 (if (eq system-type 'darwin)
     '((require 'textmate)
       (textmate-mode)
+      (require 'org-jekyll)
       (require 'org-babel-init)
       (require 'org-babel-python)
       (org-babel-load-library-of-babel)
-      (egg-git-command "/usr/local/git/bin/git")))
+      ))
 
 ;; customizations
 (require 'global)
