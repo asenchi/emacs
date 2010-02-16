@@ -1,21 +1,13 @@
 ;; functions
-(defun insert-date-long ()
+(defun asenchi/insert-date-long ()
   "Insert date at cursor."
   (interactive)
   (insert (format-time-string "%c" (current-time))))
 
-(defun insert-date-short ()
+(defun asenchi/insert-date-short ()
   "Insert date at cursor."
   (interactive)
   (insert (format-time-string "%Y%m%d-%H:%M" (current-time))))
-
-(defun toggle-fullscreen ()
-  "Toggle full screen."
-  (interactive)
-  (set-frame-parameter nil 'fullscreen
-               (if (frame-parameter nil 'fullscreen)
-                   nil
-               'fullboth)))
 
 (defun dos-unix ()
   "Convert dos to unix endline characters."
@@ -34,7 +26,7 @@
   (interactive)
   (require 'bytecomp)
   (if (string= (buffer-file-name)
-           (expand-file-name (concat default-directory "~/emacs")))
+           (expand-file-name (concat default-directory "~/.emacs")))
       (byte-compile-file (buffer-file-name))))
 
 (defun elisp-indent-or-complete (&optional arg)
@@ -121,6 +113,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE."
         (set-window-start  other-window this-start)))))
 
 (defun asenchi/show-keywords ()
+  (interactive)
   (font-lock-add-keywords
    nil
    '(("\\<\\(TODO\\|XXX\\|BUG\\):" 1 font-lock-warning-face t))))
@@ -132,5 +125,45 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE."
      (message "Copied line")
      (list (line-beginning-position)
            (line-beginning-position 2)))))
+
+(defun word-count ()
+  "Count words in buffer"
+  (interactive)
+  (shell-command-on-region (point-min) (point-max) "wc -w"))
+
+(defun insert-soft-tab ()
+  (interactive)
+  (insert "  "))
+
+;; next two functions supplied by defunkt
+(defun asenchi/kill-word (arg)
+  "Special version of kill-word which swallows spaces separate from words"
+  (interactive "p")
+  (let ((whitespace-regexp "\\s-+"))
+    (kill-region (point)
+                 (cond
+                  ((looking-at whitespace-regexp) (re-search-forward whitespace-regexp) (point))
+                  ((looking-at "\n") (kill-line) (asenchi/kill-word arg))
+                  (t (forward-word arg) (point))))))
+
+(defun asenchi/backward-kill-word (arg)
+  "Special version of backward-kill-word which swallows spaces separate from words"
+  (interactive "p")
+  (if (looking-back "\\s-+")
+      (kill-region (point) (progn (re-search-backward "\\S-") (forward-char 1) (point)))
+    (backward-kill-word arg)))
+
+(defun asenchi/duplicate-line ()
+  (interactive)
+    (beginning-of-line)
+    (copy-region-as-kill (point) (progn (end-of-line) (point)))
+    (textmate-next-line)
+    (yank)
+    (beginning-of-line)
+    (indent-according-to-mode))
+
+(defun asenchi/backward-kill-line ()
+  (interactive)
+  (kill-line 0))
 
 (provide 'functions)

@@ -10,6 +10,9 @@
 (add-auto-mode 'rst-mode "\\.rst$")
 (add-auto-mode 'rst-mode "\\.rest$")
 (add-auto-mode 'puppet-mode "\\.pp$")
+(add-auto-mode 'erlang-mode "\\.erl?$")
+(add-auto-mode 'erlang-mode "\\.hrl?$")
+(add-auto-mode 'sh-mode "\\.zsh$")
 
 ;; python
 (autoload 'python-mode "python-mode" "Python Mode." t)
@@ -94,8 +97,7 @@
         "~/emacs/org/projectcloud.org"
         "~/emacs/org/projects.org"
         "~/emacs/org/quotes.org"
-        "~/emacs/org/todo.org"
-        "~/emacs/org/work.org"))
+        "~/emacs/org/todo.org"))
 
 (setq org-refile-use-outline-path t)
 (setq org-use-tag-inheritance t
@@ -188,7 +190,8 @@
               ("N" "Notes" tags "NOTE" nil)
               ("A" "Tasks to be Archived" tags "LEVEL=2/DONE|CANCELLED" nil)
               ("p" "project(cloud)"
-               ((tags-todo "+PRIORITY=\"A\""
+               ((agenda)
+               (tags-todo "+PRIORITY=\"A\""
                            ((org-agenda-files
                              '("~/emacs/org/projectcloud.org"))))
                (todo "STARTED"
@@ -199,18 +202,6 @@
               ("P" "Projects" tags "PROJECT" nil)
               ("b" "Bookmarks" tags "BOOKMARK" nil)
               ("q" "Quotes" tags "QUOTES" nil)
-              ("w" "Work"
-               ((agenda)
-                (tags-todo "+PRIORITY=\"A\""
-                           ((org-agenda-files
-                             '("~/emacs/org/work.org"))))
-                (todo "STARTED|TODO"
-                      ((org-agenda-files
-                             '("~/emacs/org/work.org"))))
-                (tags "WAITING|TEST|DEPLOY"
-                      ((org-agenda-files
-                             '("~/emacs/org/work.org"))))
-                ))
               ("c" "Test and Deploy"
                ((tags "TEST")
                 (tags "DEPLOY")))

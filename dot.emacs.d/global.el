@@ -3,59 +3,46 @@
 
 ;; some options
 (put 'dired-find-alternate-file 'disabled nil)
-
 ;; spaces, not tabs
 (setq-default indent-tabs-mode nil)
-
-;; bold keywords
-(set-face-bold-p 'font-lock-keyword-face t)
-
-;; italicize comments
-(set-face-italic-p 'font-lock-comment-face t)
-
 ;; default tab width 4
 (setq-default tab-width 4)
-
+;; bold keywords
+(set-face-bold-p 'font-lock-keyword-face t)
+;; italicize comments
+(set-face-italic-p 'font-lock-comment-face t)
 ;; utf-8
 (prefer-coding-system 'utf-8)
-
 ;; display time in status bar
 (display-time)
-
 ;; easy typing
 (fset 'yes-or-no-p 'y-or-n-p)
-
 ;; show at least 5 lines
 (setq window-min-height 5)
-
 ;; highlight current line
 (if (eq system-type 'darwin) (hl-line-mode t))
 (if window-system (hl-line-mode t))
-
 ;; require newline
 (setq require-final-newline t)
-
 ;; get rid of backup files
 (setq backup-inhibited t)
-
 ;; merge the kill-ring w/ clipboard
 (setq x-select-enable-clipboard t)
 
-
 ;; colors
 ;; (load "color-theme-almost-monokai")
-;; (color-theme-almost-monokai)
-(load "color-theme-chocolate-rain")
-(color-theme-chocolate-rain)
+;; (load "color-theme-vibrant-ink")
+;; (load "color-theme-github")
+;; (load "color-theme-chocolate-rain")
+(load "color-theme-twilight")
+(color-theme-twilight)
 
 ;; (if (eq system-type 'darwin)
 ;;     (set-frame-parameter (selected-frame) 'alpha 90))
 
-
 (if (eq system-type 'darwin)
     (set-default-font
      "-apple-inconsolata-medium-r-normal--18-0-72-72-m-0-iso10646-1"))
-
 
 (if (eq window-system 'x)
     (set-default-font "Inconsolata-14"))
@@ -71,6 +58,6 @@
 (set-register ?m '(file . "~/.emacs.d/modes.el"))
 (set-register ?k '(file . "~/.emacs.d/keybindings.el"))
 (set-register ?P '(file . "~/emacs/org/projectcloud.org"))
-(set-register ?C '(file . "~/tmp/emacs-cheatsheet.org"))
+(set-register ?C '(file . "~/.emacs.d/emacs-cheatsheet.org"))
 
 (provide 'global)

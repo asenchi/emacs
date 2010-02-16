@@ -1,1 +1,1 @@
-;; org-persist.el - shavazooki.asenchi.com at <2010-02-03 Wed 01:15>
+;; org-persist.el - shavazooki.asenchi.com at <2010-02-16 Tue 02:22>
