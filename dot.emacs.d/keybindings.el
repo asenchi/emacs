@@ -15,7 +15,7 @@
 
 (global-set-key "\C-xw" 'whitespace-mode)
 (global-set-key "\C-xt" 'untabify-buffer)
-(global-set-key "\C-N" 'word-count)
+(global-set-key "\C-xn" 'word-count)
 (global-set-key [(control tab)] 'other-window)
 
 (global-set-key "\C-cM" 'asenchi/clock-in-read-news-and-email-task)
@@ -28,6 +28,7 @@
 (global-set-key "\C-c\C-o" 'org-clock-out)
 (global-set-key "\C-cN" 'org-cycle-agenda-files)
 (global-set-key "\C-cP" 'org-set-property-drawer)
+(global-set-key "\C-cj" 'org-journal-entry)
 
 (global-unset-key "\C-z")
 
