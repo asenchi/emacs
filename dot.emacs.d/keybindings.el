@@ -30,6 +30,8 @@
 (global-set-key "\C-cP" 'org-set-property-drawer)
 (global-set-key "\C-cj" 'org-journal-entry)
 
+(global-set-key "\C-t" 'ido-goto-symbol)
+
 (global-unset-key "\C-z")
 
 (provide 'keybindings)

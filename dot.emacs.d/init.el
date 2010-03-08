@@ -37,6 +37,7 @@
 
 (require 'ido)
 (ido-mode t)
+(require 'imenu)
 (require 'org-install)
 (require 'whitespace)
 (require 'uniquify)
