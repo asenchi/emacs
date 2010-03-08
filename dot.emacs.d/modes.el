@@ -14,6 +14,8 @@
 (add-auto-mode 'erlang-mode "\\.hrl?$")
 (add-auto-mode 'sh-mode "\\.zsh$")
 (add-auto-mode 'expresso-mode "\\.js?on$$")
+(add-auto-mode 'coffee-mode "\\.coffee$")
+(add-auto-mode 'coffee-mode "Cakefile")
 
 ;; python
 (autoload 'python-mode "python-mode" "Python Mode." t)
