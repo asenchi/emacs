@@ -95,12 +95,7 @@
               "~/emacs/org/bookmarks.org"
               "~/emacs/org/family.org"
               "~/emacs/org/groceries.org"
-              "~/emacs/org/house.org"
-              "~/emacs/org/learning.org"
-              "~/emacs/org/notes.org"
               "~/emacs/org/projectcloud.org"
-              "~/emacs/org/projects.org"
-              "~/emacs/org/quotes.org"
               "~/emacs/org/todo.org"))
 
       (setq org-refile-use-outline-path t)

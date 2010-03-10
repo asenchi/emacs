@@ -17,6 +17,7 @@
  '(line-number-mode t)
  '(make-backup-files nil)
  '(menu-bar-mode nil)
+ '(org-agenda-files (quote ("~/emacs/org/remember.org" "~/emacs/org/bookmarks.org" "~/emacs/org/family.org" "~/emacs/org/groceries.org" "~/emacs/org/projectcloud.org" "~/emacs/org/todo.org")))
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
  '(show-paren-style (quote parenthesis))
