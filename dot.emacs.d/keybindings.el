@@ -21,9 +21,9 @@
 (global-set-key "\C-cM" 'asenchi/clock-in-read-news-and-email-task)
 (global-set-key "\C-cO" 'asenchi/clock-in-organization-task)
 (global-set-key [remap kill-word] 'asenchi/kill-word)
-(global-set-key [remap backward-kill-word] 'asenchi/backward-kill-word)
+(global-set-key [remap backward-kill-word] 'defunkt/backward-kill-word)
 (global-set-key "\C-\M-j" 'asenchi/duplicate-line)
-(global-set-key [(control meta delete)] 'asenchi/backward-kill-line)
+(global-set-key [(control meta delete)] 'defunkt/backward-kill-line)
 
 (global-set-key "\C-c\C-o" 'org-clock-out)
 (global-set-key "\C-cN" 'org-cycle-agenda-files)
