@@ -24,7 +24,6 @@
   (setq indent-tabs-mode nil)
   (auto-fill-mode 1)
   (turn-on-eldoc-mode)
-  ;(setq fill-column 79)
   (define-key python-mode-map "\"" 'electric-pair)
   (define-key python-mode-map "\'" 'electric-pair)
   (define-key python-mode-map "(" 'electric-pair)
