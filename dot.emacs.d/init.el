@@ -44,6 +44,9 @@
 (setq uniquify-buffer-name-style 'forward)
 (require 'python-mode)
 (setq py-python-command-args '( "-colors" "Linux"))
+(require 'coffee-mode)
+(require 'tabbar)
+(require 'mustache-mode)
 
 ;; Load textmate and org-babel on Macbook.
 (if (eq system-type 'darwin)
@@ -57,8 +60,7 @@
       (setq erlang-root-dir "/usr/local/lib/erlang")
       (setq exec-path (cons "/usr/local/lib/erlang/bin" exec-path))
       (require 'erlang-start)
-      (require 'minimap)
-      (require 'coffee-mode)))
+      (require 'minimap)))
 
 ;; customizations
 (require 'global)
