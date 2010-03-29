@@ -1,25 +1,21 @@
 ;; pretty auto-mode adder
-(defun add-auto-mode (mode &rest patterns)
-  (dolist (pattern patterns)
-    (add-to-list 'auto-mode-alist (cons pattern mode))))
+(defun add-auto-mode (mode pattern)
+  (add-to-list 'auto-mode-alist (ext-mode-map pattern mode)))
 
 ;; modes
-(add-auto-mode 'text-mode "\\.te?xt$")
-(add-auto-mode 'perl-mode "\\.pl$")
-(add-auto-mode 'lisp-mode "\\.emacs$")
-(add-auto-mode 'rst-mode "\\.rst$")
-(add-auto-mode 'rst-mode "\\.rest$")
-(add-auto-mode 'puppet-mode "\\.pp$")
-(add-auto-mode 'erlang-mode "\\.erl?$")
-(add-auto-mode 'erlang-mode "\\.hrl?$")
-(add-auto-mode 'sh-mode "\\.zsh$")
-(add-auto-mode 'expresso-mode "\\.js?on$$")
-(add-auto-mode 'coffee-mode "\\.coffee$")
-(add-auto-mode 'coffee-mode "Cakefile")
+(add-auto-mode 'sh-mode '(bash sh zsh))
+(add-auto-mode 'text-mode '(text txt))
+(add-auto-mode 'perl-mode '(pl perl))
+(add-auto-mode 'lisp-mode '(emacs el))
+(add-auto-mode 'rst-mode '(rst rest))
+(add-auto-mode 'puppet-mode '(pp puppet))
+(add-auto-mode 'erlang-mode '(erl hrl))
+(add-auto-mode 'js2-mode '(js json))
+(add-auto-mode 'coffee-mode '(Cakefile coffee))
 
 ;; python
 (autoload 'python-mode "python-mode" "Python Mode." t)
-(add-auto-mode 'python-mode "\\.py\\'")
+(add-auto-mode 'python-mode 'py)
 (add-to-list 'interpreter-mode-alist '("python" . python-mode))
 
 (defun asenchi/python-mode-hook ()
@@ -51,10 +47,7 @@
 (add-hook 'html-mode-hook 'asenchi/html-mode-hook)
 
 ;; ruby
-(add-auto-mode 'ruby-mode "\\.rake$")
-(add-auto-mode 'ruby-mode "Rakefile$")
-(add-auto-mode 'ruby-mode "Capfile$")
-(add-auto-mode 'ruby-mode "\\.rb$")
+(add-auto-mode 'ruby-mode '(rake Rakefile Capfile rb))
 (add-to-list 'interpreter-mode-alist '("ruby" . ruby-mode))
 (autoload 'run-ruby "inf-ruby" "Run an inferior Ruby process")
 (autoload 'inf-ruby-keys "inf-ruby" "Set local key defs for inf-ruby")
@@ -71,8 +64,7 @@
     '((setq *org-path* (concat *home-path* "/emacs/org"))
       (add-to-list 'load-path *org-path*)
 
-      (add-auto-mode 'org-mode '"\\.org$")
-      (add-auto-mode 'org-mode '"\\.org_archive$")
+      (add-auto-mode 'org-mode '(org org_archives))
 
       (setq org-export-htmlize-output-type 'css)
       (setq org-startup-indented t

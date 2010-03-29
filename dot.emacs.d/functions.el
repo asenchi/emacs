@@ -197,4 +197,18 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE."
            (position (cdr (assoc selected-symbol name-and-pos))))
       (goto-char position))))
 
+(defun file-extensions (l)
+  (concat "\\.\\("
+          (mapconcat
+           (lambda (s)
+             (mapconcat (lambda (c)
+                          (let ((c (upcase (char-to-string c))))
+                            (concat "[" c (downcase c) "]")))
+                        (symbol-name s) ""))
+           l "\\|")
+          "\\)\\'"))
+
+(defun ext-mode-map (extensions mode)
+  (cons (file-extensions extensions) mode))
+
 (provide 'functions)
