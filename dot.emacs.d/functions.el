@@ -136,7 +136,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE."
   (insert "  "))
 
 ;; next two functions supplied by defunkt
-(defun asenchi/kill-word (arg)
+(defun defunkt/kill-word (arg)
   "Special version of kill-word which swallows spaces separate from words"
   (interactive "p")
   (let ((whitespace-regexp "\\s-+"))
@@ -146,7 +146,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE."
                   ((looking-at "\n") (kill-line) (asenchi/kill-word arg))
                   (t (forward-word arg) (point))))))
 
-(defun asenchi/backward-kill-word (arg)
+(defun defunkt/backward-kill-word (arg)
   "Special version of backward-kill-word which swallows spaces separate from words"
   (interactive "p")
   (if (looking-back "\\s-+")
