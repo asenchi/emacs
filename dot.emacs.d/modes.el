@@ -15,7 +15,7 @@
 
 ;; python
 (autoload 'python-mode "python-mode" "Python Mode." t)
-(add-auto-mode 'python-mode 'py)
+(add-auto-mode 'python-mode '(py python))
 (add-to-list 'interpreter-mode-alist '("python" . python-mode))
 
 (defun asenchi/python-mode-hook ()
