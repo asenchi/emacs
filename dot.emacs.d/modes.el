@@ -10,7 +10,8 @@
 (add-auto-mode 'rst-mode '(rst rest))
 (add-auto-mode 'puppet-mode '(pp puppet))
 (add-auto-mode 'erlang-mode '(erl hrl))
-(add-auto-mode 'js2-mode '(js json))
+
+(add-auto-mode 'espresso-mode '(js json))
 (add-auto-mode 'coffee-mode '(Cakefile coffee))
 
 ;; python

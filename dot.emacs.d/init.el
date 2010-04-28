@@ -33,7 +33,8 @@
 (require 'egg)
 (require 'color-theme)
 (require 'puppet-mode)
-(require 'js2-mode)
+;(require 'js2-mode)
+(autoload #'espresso-mode "espresso" "Start espresso-mode" t)
 
 (require 'ido)
 (ido-mode t)
