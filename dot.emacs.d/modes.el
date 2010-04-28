@@ -59,223 +59,223 @@
      (set-face-foreground 'diff-added "green4")
      (set-face-foreground 'diff-removed "red3")))
 
-(if (eq system-type 'darwin)
-    ;; org-mode
-    '((setq *org-path* (concat *home-path* "/emacs/org"))
-      (add-to-list 'load-path *org-path*)
 
-      (add-auto-mode 'org-mode '(org org_archives))
+;; org-mode
+(setq *org-path* (concat *home-path* "/emacs/org"))
+(add-to-list 'load-path *org-path*)
 
-      (setq org-export-htmlize-output-type 'css)
-      (setq org-startup-indented t
-            org-ellipsis "..."
-            org-hide-leading-stars t
-            org-fontify-done-headline t
-            org-fontify-emphasized-text t)
-      (setq org-default-notes-file (concat *org-path* "/remember.org"))
+(add-auto-mode 'org-mode '(org org_archives))
 
-      (require 'remember)
-      (org-remember-insinuate)
-      (setq org-remember-store-without-promptut-prompt t
-            org-remember-default-headline "Tasks"
-            org-log-done t
-            org-use-fast-todo-selectionlection t
-            org-treat-S-cursor-todo-selection-as-state-change-as-state-change nil)
+(setq org-export-htmlize-output-type 'css)
+(setq org-startup-indented t
+      org-ellipsis "..."
+      org-hide-leading-stars t
+      org-fontify-done-headline t
+      org-fontify-emphasized-text t)
+(setq org-default-notes-file (concat *org-path* "/remember.org"))
 
-      (setq org-agenda-files
-            '("~/emacs/org/remember.org"
-              "~/emacs/org/bookmarks.org"
-              "~/emacs/org/family.org"
-              "~/emacs/org/groceries.org"
-              "~/emacs/org/projectcloud.org"
-              "~/emacs/org/todo.org"))
+(require 'remember)
+(org-remember-insinuate)
+(setq org-remember-store-without-promptut-prompt t
+      org-remember-default-headline "Tasks"
+      org-log-done t
+      org-use-fast-todo-selectionlection t
+      org-treat-S-cursor-todo-selection-as-state-change-as-state-change nil)
 
-      (setq org-refile-use-outline-path t)
-      (setq org-use-tag-inheritance t
-            org-use-property-inheritance t)
-      (setq org-remember-clock-out-on-exit nil)
-      (setq org-completion-use-ido t)
-      (setq org-refile-targets
-            (quote ((org-agenda-files :maxlevel . 5) (nil :maxlevel . 5))))
-      (setq org-refile-use-outline-path (quuote file))
-      (setq org-outline-path-complete-in-steps t)
-      (setq org-refile-allow-creating-parent-nodes (quotete confirm))
-      (setq org-archive-mark-done nil)
+(setq org-agenda-files
+      '("~/emacs/org/remember.org"
+        "~/emacs/org/bookmarks.org"
+        "~/emacs/org/family.org"
+        "~/emacs/org/groceries.org"
+        "~/emacs/org/projectcloud.org"
+        "~/emacs/org/todo.org"))
 
-      (globall-set-key "\C-ca" 'org-agenda)
-      (global-set-key "\C-cr" 'org-remember)
-      (global-set-key "\C-cl" 'org-store-link)
-      (global-set-key "\C-cb" 'org-iswitchb)
+(setq org-refile-use-outline-path t)
+(setq org-use-tag-inheritance t
+      org-use-property-inheritance t)
+(setq org-remember-clock-out-on-exit nil)
+(setq org-completion-use-ido t)
+(setq org-refile-targets
+      (quote ((org-agenda-files :maxlevel . 5) (nil :maxlevel . 5))))
+(setq org-refile-use-outline-path (quote file))
+(setq org-outline-path-complete-in-steps t)
+(setq org-refile-allow-creating-parent-nodes (quote confirm))
+(setq org-archive-mark-done nil)
 
-      (setq org-todo-keywords
-            '((sequence "TODO(t)" "STARTED(s!)" "|" "DONE(d!/!)")
-              (sequence "WAITING(w)" "|" "CANCELLED(C!/!)")
-              (sequence
-               "IDEA(c)" "STARTED(S!)" "TEST(T)" "DEPLOY(D)" "|" "DONE(d!/!)")
-              ))
+(global-set-key "\C-ca" 'org-agenda)
+(global-set-key "\C-cr" 'org-remember)
+(global-set-key "\C-cl" 'org-store-link)
+(global-set-key "\C-cb" 'org-iswitchb)
 
-      (setq org-todo-keyword-faces
-            '(("TODO" . (:foreground "DarkOrange1" :weight bold))
-              ("STARTED" . (:foreground "blue" :weight bold))
-              ("TEST" . (:foreground "red"))
-              ("DEPLOY" . (:foreground "light blue"))
-              ("DONE" . (:foreground "light sea green"))
-              ))
+(setq org-todo-keywords
+      '((sequence "TODO(t)" "STARTED(s!)" "|" "DONE(d!/!)")
+        (sequence "WAITING(w)" "|" "CANCELLED(C!/!)")
+        (sequence
+         "IDEA(c)" "STARTED(S!)" "TEST(T)" "DEPLOY(D)" "|" "DONE(d!/!)")
+        ))
 
-      (setq org-todo-state-tags-triggers
-            (quote (("WAITING" ("WAITING" . t) ("NEXT"))
-                    (done ("WAITING") ("NEXT") ("TEST") ("DEPLOY"))
-                    ("TODO" ("WAITING") ("NEXT") ("TEST") ("DEPLOY"))
-                    ("DONE" ("WAITING") ("NEXT") ("TEST") ("DEPLOY"))
-                    ("STARTED" ("WAITING"))
-                    ("TEST" ("TEST" . t))
-                    ("DEPLOY" ("DEPLOY" . t) ("TEST"))
-                    )))
+(setq org-todo-keyword-faces
+      '(("TODO" . (:foreground "DarkOrange1" :weight bold))
+        ("STARTED" . (:foreground "blue" :weight bold))
+        ("TEST" . (:foreground "red"))
+        ("DEPLOY" . (:foreground "light blue"))
+        ("DONE" . (:foreground "light sea green"))
+        ))
 
-      (setq org-tag-alist (quote ((:startgroup)
-                                  ("@errand" . ?e)
-                                  ("@work" . ?o)
-                                  ("@home" . ?h)
-                                  ("@coffeeshop" . ?c)
-                                  (:endgroup)
-                                  ("NEXT" . ?n)
-                                  ("WAITING" . ?w)
-                                  ("HOME" . ?H)
-                                  ("LEARN" . ?l)
-                                  ("PROJECT" . ?p)
-                                  ("PROJECTCLOUD" . ?P)
-                                  ("WORK" . ?O)
-                                  ("TEST" . ?t)
-                                  ("DEPLOY" . ?d))))
+(setq org-todo-state-tags-triggers
+      (quote (("WAITING" ("WAITING" . t) ("NEXT"))
+              (done ("WAITING") ("NEXT") ("TEST") ("DEPLOY"))
+              ("TODO" ("WAITING") ("NEXT") ("TEST") ("DEPLOY"))
+              ("DONE" ("WAITING") ("NEXT") ("TEST") ("DEPLOY"))
+              ("STARTED" ("WAITING"))
+              ("TEST" ("TEST" . t))
+              ("DEPLOY" ("DEPLOY" . t) ("TEST"))
+              )))
+
+(setq org-tag-alist (quote ((:startgroup)
+                            ("@errand" . ?e)
+                            ("@work" . ?o)
+                            ("@home" . ?h)
+                            ("@coffeeshop" . ?c)
+                            (:endgroup)
+                            ("NEXT" . ?n)
+                            ("WAITING" . ?w)
+                            ("HOME" . ?H)
+                            ("LEARN" . ?l)
+                            ("PROJECT" . ?p)
+                            ("PROJECTCLOUD" . ?P)
+                            ("WORK" . ?O)
+                            ("TEST" . ?t)
+                            ("DEPLOY" . ?d))))
 
 
-      (defun asenchi/clock-in-to-started (kw)
-        "Switch task from TODO to STARTED when clocking in"
-        (if (and (string-equal kw "TODO")
-                 (not (string-equal (buffer-name) "*Remember*")))
-            "STARTED"
-          nil))
-      (setq org-clock-in-switch-to-state 'asenchi/clock-in-to-started)
+(defun asenchi/clock-in-to-started (kw)
+  "Switch task from TODO to STARTED when clocking in"
+  (if (and (string-equal kw "TODO")
+           (not (string-equal (buffer-name) "*Remember*")))
+      "STARTED"
+    nil))
+(setq org-clock-in-switch-to-state 'asenchi/clock-in-to-started)
 
-      (setq org-remember-templates
-            '(("todo" ?t "* TODO %^{TODO}\n %?\n %a" nil bottom nil)
-              ("note" ?n "** %^{Note} :NOTE:\n %U\n %a" nil bottom nil)
-              ("learn" ?l
-               "*** %^{Lesson} %^g\n %U\n %?\n" "~/org/learning.org" bottom nil)
-              ("Quote" ?q
-               "** %^{Quote} - %^{Author} %u %^G\n"
-               "~/emacs/org/quotes.org" "Quotes")
-              ("Bookmark" ?b
-               "* ([%^{URL}] %^{Description} %U)\n"
-               "~/emacs/org/bookmarks.org" "Bookmarks")))
+(setq org-remember-templates
+      '(("todo" ?t "* TODO %^{TODO}\n %?\n %a" nil bottom nil)
+        ("note" ?n "** %^{Note} :NOTE:\n %U\n %a" nil bottom nil)
+        ("learn" ?l
+         "*** %^{Lesson} %^g\n %U\n %?\n" "~/org/learning.org" bottom nil)
+        ("Quote" ?q
+         "** %^{Quote} - %^{Author} %u %^G\n"
+         "~/emacs/org/quotes.org" "Quotes")
+        ("Bookmark" ?b
+         "* ([%^{URL}] %^{Description} %U)\n"
+         "~/emacs/org/bookmarks.org" "Bookmarks")))
 
-      (setq org-agenda-custom-commands
-            (quote (("s" "Started Tasks" todoo "STARTED"
-                     ((org-agenda-todo-ignore-scheduleduled nil)
-                      (org-agenda-todo-ignore-deadlines nil)
-                      (org-agenda-todo-ignore-with-date nil)))
-                    ("r" "Refile New Notes and Tasks" tags "LEVEL=1+REMEMBER"
-                     ((org-agenda-todo-ignore-with-date nil)
-                      (org-agenda-todo-ignore-deadlines nil)
-                      (org-agenda-todo-ignore-scheduled nil)))
-                    ("N" "Notes" tags "NOTE" nil)
-                    ("A" "Tasks to be Archived" tags "LEVEL=2/DONE|CANCELLED" nil)
-                    ("p" "project(cloud)"
-                     ((agenda)
-                      (tags-todo "+PRIORITY=\"A\""
-                                 ((org-agendada-files
-                                   '("~/emacs/org/projectcloud.org"))))
-                      (todo "STARTED"
-                            ((org-agenda-filees '("~/emacs/org/projectcloud.org"))))
-                      (tags "TEST|DEPLOY|WAITING"
-                            ((org-agenda-files '("~/emacs/org/projectcloud.org"))))
-                      (tags "PROJECTCLOUD" nil)))
-                    ("P" "Projects" tags "PROJECT" nil)
-                    ("b" "Bookmarks" tags "BOOKMARK" nil)
-                    ("q" "Quotes" tags "QUOTES" nil)
-                    ("c" "Test and Deploy"
-                     ((tags "TEST")
-                      (tags "DEPLOY")))
-                    )))
+(setq org-agenda-custom-commands
+      (quote (("s" "Started Tasks" todoo "STARTED"
+               ((org-agenda-todo-ignore-scheduleduled nil)
+                (org-agenda-todo-ignore-deadlines nil)
+                (org-agenda-todo-ignore-with-date nil)))
+              ("r" "Refile New Notes and Tasks" tags "LEVEL=1+REMEMBER"
+               ((org-agenda-todo-ignore-with-date nil)
+                (org-agenda-todo-ignore-deadlines nil)
+                (org-agenda-todo-ignore-scheduled nil)))
+              ("N" "Notes" tags "NOTE" nil)
+              ("A" "Tasks to be Archived" tags "LEVEL=2/DONE|CANCELLED" nil)
+              ("p" "project(cloud)"
+               ((agenda)
+                (tags-todo "+PRIORITY=\"A\""
+                           ((org-agendada-files
+                             '("~/emacs/org/projectcloud.org"))))
+                (todo "STARTED"
+                      ((org-agenda-filees '("~/emacs/org/projectcloud.org"))))
+                (tags "TEST|DEPLOY|WAITING"
+                      ((org-agenda-files '("~/emacs/org/projectcloud.org"))))
+                (tags "PROJECTCLOUD" nil)))
+              ("P" "Projects" tags "PROJECT" nil)
+              ("b" "Bookmarks" tags "BOOKMARK" nil)
+              ("q" "Quotes" tags "QUOTES" nil)
+              ("c" "Test and Deploy"
+               ((tags "TEST")
+                (tags "DEPLOY")))
+              )))
 
-      ;; Resume clocking tasks when emacs is restarted
-      (org-clock-persistence-insinuateate)
-      ;; Yes it's long... but more is better ;)
-      (setq org-clock-history-length 28)
-      ;; Resume clocking task on clock-in if the clock is open
-      (setq org-clock-in-resume t)
-      ;; Change task state to STARTED when clocking in
-      (setq org-clock-in-switch-to-state "STARTED")
-      ;; Separate drawers for clocking and logs
-      (setq org-drawers (quote ("PROPERTIES" "LOGBOOK" "CLOCK")))
-      ;; Save clock data in the CLOCK drawer and state changes
-      ;; and notes in the LOGBOOK drawer
-      (setq org-cloock-into-drawer "CLOCK")
-      ;; Sometimes I change tasks I'm clocking quickly
-      ;; - this removes clocked tasks with 0:00 duration
-      (setq org-cloock-out-remove-zero-time-clocks t)
-      ;; Don't clock out when moving task to a done state
-      (setq org-clock-out-when-done nil)
-      ;; Save the running clock and all clock history when exiting Emacs,
-      ;; loadd it on startup
-      (setq org-clock-persist (quote history))
-      ;; Disable auto clock resolution
-      (setq org-clock-auto-clock-resolution nil)
+;; Resume clocking tasks when emacs is restarted
+(org-clock-persistence-insinuateate)
+;; Yes it's long... but more is better ;)
+(setq org-clock-history-length 28)
+;; Resume clocking task on clock-in if the clock is open
+(setq org-clock-in-resume t)
+;; Change task state to STARTED when clocking in
+(setq org-clock-in-switch-to-state "STARTED")
+;; Separate drawers for clocking and logs
+(setq org-drawers (quote ("PROPERTIES" "LOGBOOK" "CLOCK")))
+;; Save clock data in the CLOCK drawer and state changes
+;; and notes in the LOGBOOK drawer
+(setq org-cloock-into-drawer "CLOCK")
+;; Sometimes I change tasks I'm clocking quickly
+;; - this removes clocked tasks with 0:00 duration
+(setq org-cloock-out-remove-zero-time-clocks t)
+;; Don't clock out when moving task to a done state
+(setq org-clock-out-when-done nil)
+;; Save the running clock and all clock history when exiting Emacs,
+;; loadd it on startup
+(setq org-clock-persist (quote history))
+;; Disable auto clock resolution
+(setq org-clock-auto-clock-resolution nil)
 
-      (defun asenchi/clock-in-task-by-id (id)
-        "Clock in a task by id"
-        (require 'org-id)
-        (save-restrictionn
-         (widen)
-         (org-with-point-atint-at (org-id-find id 'marker)
-                                  (org-clock-in nil))))
+(defun asenchi/clock-in-task-by-id (id)
+  "Clock in a task by id"
+  (require 'org-id)
+  (save-restrictionn
+   (widen)
+   (org-with-point-atint-at (org-id-find id 'marker)
+                            (org-clock-in nil))))
 
-      (defun asenchi/clock-in-organization-task ()
-        (interactive)
-        (asenchi/clock-in-task-by-id "8822EC04-14A8-49C7-B8EA-C0228EE30BD9"))
+(defun asenchi/clock-in-organization-task ()
+  (interactive)
+  (asenchi/clock-in-task-by-id "8822EC04-14A8-49C7-B8EA-C0228EE30BD9"))
 
-      (defun asenchi/clock-in-read-news-and-email-taskd-news-and-email-task ()
-        (interactive)
-        (asenchi/clock-in-task-by-id "6BA66086-3663-4315-969D-44DC15739093"))
+(defun asenchi/clock-in-read-news-and-email-taskd-news-and-email-task ()
+  (interactive)
+  (asenchi/clock-in-task-by-id "6BA66086-3663-4315-969D-44DC15739093"))
 
-      (defun asenchi/clock-in-interrupted-task ()
-        "Clock in the interrupted task if there is one"
-        (interactiveve)
-        (if (and (not org-clock-resolving-clocks-due-to-idleness)
-                 (marker-buffer org-clock-marker)
-                 (marker-buffer org-cloock-interrupted-task))
-            (org-with-point-at org-clock-interrupted-taskrrupted-task
-                               (org-clock-in nil))
-          (org-clock-out)))
+(defun asenchi/clock-in-interrupted-task ()
+  "Clock in the interrupted task if there is one"
+  (interactiveve)
+  (if (and (not org-clock-resolving-clocks-due-to-idleness)
+           (marker-buffer org-clock-marker)
+           (marker-buffer org-cloock-interrupted-task))
+      (org-with-point-at org-clock-interrupted-taskrrupted-task
+        (org-clock-in nil))
+    (org-clock-out)))
 
-      (setq org-stuck-projects
-            (quote
-             ("LEVEL=2-REFILE-WAITING|LEVEL=1+REFILE/!-DONE-CANCELLED-OPEN"
-              nil ("NEXT") "")))
+(setq org-stuck-projects
+      (quote
+       ("LEVEL=2-REFILE-WAITING|LEVEL=1+REFILE/!-DONE-CANCELLED-OPEN"
+        nil ("NEXT") "")))
 
-      (defvar org-journal-file "~/emacs/org/journal.org"
-        "Path to OrgMode journal file.")
-      (defvar org-journal-date-format "%Y-%m-%d"
-        "Date format string for journal headings.")
+(defvar org-journal-file "~/emacs/org/journal.org"
+  "Path to OrgMode journal file.")
+(defvar org-journal-date-format "%Y-%m-%d"
+  "Date format string for journal headings.")
 
-      (defun org-journal-entry ()
-        "Create a new diary entry for today or append to an existing one."
-        (interactive)
-        (switch-to-buffer (find-file org-journal-file))
-        (widen)
-        (let ((today (format-time-string org-journal-date-format)))
-          (beginning-of-bufferfer)
-          (unless (org-goto-local-search-headingsarch-headings today nil t)
-            ((lambda ()
-               (org-insert-headingding)
-               (insert today)
-               (insert "\n\n  \n"))))
-          (beginning-of-buffer)
-          (org-show-entry)
-          (org-narrow-to-subtreeee)
-          (end-of-buffer)
-          (backward-char 2C-)
-          (unless (= (current-columnumn) 2)
-            (insert "\n\n  "))))))
+(defun org-journal-entry ()
+  "Create a new diary entry for today or append to an existing one."
+  (interactive)
+  (switch-to-buffer (find-file org-journal-file))
+  (widen)
+  (let ((today (format-time-string org-journal-date-format)))
+    (beginning-of-bufferfer)
+    (unless (org-goto-local-search-headingsarch-headings today nil t)
+      ((lambda ()
+         (org-insert-headingding)
+         (insert today)
+         (insert "\n\n  \n"))))
+    (beginning-of-buffer)
+    (org-show-entry)
+    (org-narrow-to-subtreeee)
+    (end-of-buffer)
+    (backward-char 2C-)
+    (unless (= (current-columnumn) 2)
+      (insert "\n\n  "))))
 
 (provide 'modes)
