@@ -29,23 +29,22 @@
 ;; merge the kill-ring w/ clipboard
 (setq x-select-enable-clipboard t)
 
+(setq mac-command-modifier 'meta)
+
 ;; colors
 ;; (load "color-theme-almost-monokai")
 ;; (load "color-theme-vibrant-ink")
-;; (load "color-theme-github")
+(load "color-theme-github")
 ;; (load "color-theme-chocolate-rain")
-(load "color-theme-twilight")
-(color-theme-twilight)
+;; (load "color-theme-twilight")
+(color-theme-github)
 
 ;; (if (eq system-type 'darwin)
 ;;     (set-frame-parameter (selected-frame) 'alpha 90))
 
 (if (eq system-type 'darwin)
-    (set-default-font
-     "-apple-inconsolata-medium-r-normal--18-0-72-72-m-0-iso10646-1"))
-
-(if (eq window-system 'x)
-    (set-default-font "Inconsolata-14"))
+    (set-default-font "Menlo-Regular-14"))
+;     "-apple-inconsolata-medium-r-normal--16-0-72-72-m-0-iso10646-1"))
 
 ;; hooks
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)

@@ -45,12 +45,11 @@
 (rvm-use-default)
 
 ;; Load textmate and org-babel on Macbook.
-(if (eq system-type 'darwin)
-    '((require 'org-babel-init)
-      (require 'org-babel-python)
-      (org-babel-load-library-of-babel)
-      (setq load-path
-            (cons "/usr/local/lib/erlang/lib/tools-2.6.5/emacs" load-path))))
+;; (if (eq system-type 'darwin)
+;;     '((require 'org-babel-init)
+;;       (require 'org-babel-python)
+;;       (org-babel-load-library-of-babel)
+;;       ))
 
 ;; customizations
 (require 'global)
