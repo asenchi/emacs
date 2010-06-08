@@ -29,7 +29,7 @@
 (require 'color-theme)
 (require 'puppet-mode)
 (autoload #'espresso-mode "espresso" "Start espresso-mode" t)
-
+(require 'nav)
 (require 'ido)
 (ido-mode t)
 (require 'imenu)
