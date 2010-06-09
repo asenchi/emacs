@@ -71,4 +71,7 @@
     (ad-deactivate-regexp "other-window-nop")))
 (ad-activate-regexp "prefix-nav")
 
+(if (window-system)
+    (set-frame-width (selected-frame) 90))
+
 (provide 'global)
