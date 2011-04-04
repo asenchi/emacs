@@ -33,9 +33,10 @@
 
 (if (eq system-type 'darwin)
     (progn
-      (set-frame-font "Menlo-16")
-      (set-frame-width (selected-from) 90)))
-(load-theme 'tango)
+      (set-frame-font "Menlo-14")
+      (set-frame-width (selected-frame) 90)))
+(load "color-theme-github")
+(color-theme-github)
 
 (display-time)
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -109,7 +110,6 @@
 (eval-after-load "lisp-mode"
   '(progn
      (define-key emacs-lisp-mode-map [tab] 'elisp-indent-or-complete)))
-
 
 (defun python-mode-hook ()
   (setq indent-tabs-mode nil)
